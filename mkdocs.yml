@@ -1,0 +1,34 @@
+site_name: Microsoft Foundry Workshop
+site_description: Beginner-friendly Microsoft Foundry workshop with official-documentation-based exercises.
+repo_name: foundry-workshop
+repo_url: https://github.com/beyondelastic/foundry-workshop
+edit_uri: edit/main/docs/
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: teal
+      accent: amber
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.footer
+    - content.code.copy
+    - content.action.edit
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - tables
+extra_css:
+  - assets/stylesheets/extra.css
+nav:
+  - Home: index.md
+  - 00 Prerequisites: 00-prereqs.md
+  - 01 Create Foundry Resources: 01-create-foundry-resources.md
+  - 02 First Model Call: 02-first-model-call.md
+  - 03 Build An Agent: 03-build-an-agent.md
+  - 04 Evaluate An Agent: 04-evaluate-an-agent.md
+  - 05 Tool Calls: 05-tool-calls.md
+  - 06 Simple RAG: 06-simple-rag.md
+  - 07 Stretch Lab: 07-stretch-tracing.md

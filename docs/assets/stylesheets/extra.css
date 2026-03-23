@@ -1,0 +1,36 @@
+:root {
+  --workshop-ink: #12343b;
+  --workshop-accent: #efc14d;
+  --workshop-surface: #f5f4ee;
+  --workshop-panel: #ffffff;
+}
+
+.md-main {
+  background:
+    radial-gradient(circle at top right, rgba(239, 193, 77, 0.16), transparent 28%),
+    linear-gradient(180deg, #f5f4ee 0%, #ffffff 36%);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.hero-card {
+  background: var(--workshop-panel);
+  border: 1px solid rgba(18, 52, 59, 0.1);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(18, 52, 59, 0.08);
+  padding: 1rem 1rem 0.75rem;
+}
+
+.hero-card h3 {
+  color: var(--workshop-ink);
+  margin-top: 0;
+}
+
+.hero-card p {
+  margin-bottom: 0.2rem;
+}

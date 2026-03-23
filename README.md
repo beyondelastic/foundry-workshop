@@ -1,0 +1,73 @@
+# Microsoft Foundry Workshop
+
+This repository is a beginner-friendly Microsoft Foundry workshop built around official Microsoft Learn guidance and official samples.
+
+## What this workshop covers
+
+1. Prepare your environment and verify Azure prerequisites.
+2. Create Microsoft Foundry resources and deploy a model.
+3. Make your first Python SDK model call.
+4. Create a prompt agent and have a multi-turn conversation.
+5. Evaluate that agent with a small dataset.
+6. Use a built-in tool from a prompt agent.
+7. Build a simple RAG flow with file search.
+8. Explore one stretch topic for observability.
+
+## Design goals
+
+- Keep the flow easy to follow.
+- Favor official documentation over custom theory.
+- Keep examples short and runnable.
+- Use a lightweight docs-first web UI.
+
+## Official sources used
+
+- Microsoft Foundry resource quickstart
+- Microsoft Foundry SDK overview for Python
+- Microsoft Foundry quickstart for models and agents
+- Microsoft Foundry agent evaluation guidance
+- microsoft-foundry/foundry-samples
+
+## Repository layout
+
+```text
+.
+├── docs/
+├── examples/
+├── mkdocs.yml
+├── requirements.txt
+└── SETUP.md
+```
+
+## Quick start
+
+1. Create a Python virtual environment.
+2. Install dependencies.
+3. Sign in to Azure.
+4. Copy `.env.example` to `.env` and fill in your project values.
+5. Start the docs UI with `mkdocs serve`.
+
+Detailed steps are in `SETUP.md`.
+
+## Run the workshop UI
+
+```bash
+mkdocs serve
+```
+
+Then open the local URL shown in the terminal, usually `http://127.0.0.1:8000`.
+
+## Run the examples
+
+```bash
+python examples/01-model-call/model_call.py
+python examples/02-agent-chat/create_agent.py
+python examples/02-agent-chat/chat_with_agent.py
+python examples/03-agent-eval/evaluate_agent.py
+python examples/04-tool-web-search/web_search_agent.py
+python examples/05-simple-rag/file_search_rag.py
+```
+
+## Notes on versions
+
+This workshop assumes the current Microsoft Foundry projects API shape used in `azure-ai-projects>=2.0.0`. If Microsoft updates the SDK or quickstarts, update the examples to match the current official docs.

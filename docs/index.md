@@ -2,6 +2,8 @@
 
 Welcome to a docs-first Microsoft Foundry workshop for beginners.
 
+Workshop source repository: [beyondelastic/foundry-workshop](https://github.com/beyondelastic/foundry-workshop)
+
 This workshop is intentionally small, practical, and tied to official Microsoft documentation. Each section includes:
 
 - a clear goal
@@ -34,7 +36,8 @@ This workshop is intentionally small, practical, and tied to official Microsoft 
 5. Evaluate that agent with a small dataset.
 6. Add a built-in tool to an agent and force a tool-backed answer.
 7. Build a simple RAG flow with file search over a local document.
-8. Explore tracing as a stretch lab.
+8. Coordinate two agents with different tools on one task.
+9. Explore tracing as a stretch lab.
 
 ## Before you start
 
@@ -53,3 +56,4 @@ By the end of the core labs, you should be able to:
 - evaluate the agent with built-in evaluators
 - use a built-in agent tool for a grounded response
 - ground an agent answer against uploaded document content
+- coordinate two agents through a simple Python orchestrator

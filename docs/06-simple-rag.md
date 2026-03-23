@@ -10,9 +10,9 @@ Build a small retrieval-augmented generation flow by grounding an agent on a loc
 
 ## Official references
 
-- Azure AI Projects Python sample: `sample_agent_file_search.py`
-- Azure AI Projects tests for file-search tool behavior
-- Azure AI Search classic RAG documentation for the overall pattern
+- [Azure SDK for Python file and agent samples](https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/ai/azure-ai-projects/samples)
+- [Microsoft Foundry SDKs and Endpoints](https://learn.microsoft.com/azure/foundry/how-to/develop/sdk-overview?tabs=sync&pivots=programming-language-python)
+- [Azure AI Search classic generative search (RAG) overview](https://learn.microsoft.com/azure/search/retrieval-augmented-generation-overview)
 
 ## Why this lab uses file search
 

@@ -2,6 +2,8 @@
 
 This repository is a beginner-friendly Microsoft Foundry workshop built around official Microsoft Learn guidance and official samples.
 
+GitHub repository: [beyondelastic/foundry-workshop](https://github.com/beyondelastic/foundry-workshop)
+
 ## What this workshop covers
 
 1. Prepare your environment and verify Azure prerequisites.
@@ -11,7 +13,8 @@ This repository is a beginner-friendly Microsoft Foundry workshop built around o
 5. Evaluate that agent with a small dataset.
 6. Use a built-in tool from a prompt agent.
 7. Build a simple RAG flow with file search.
-8. Explore one stretch topic for observability.
+8. Coordinate two agents on one task with different tools.
+9. Explore one stretch topic for observability.
 
 ## Design goals
 
@@ -22,11 +25,12 @@ This repository is a beginner-friendly Microsoft Foundry workshop built around o
 
 ## Official sources used
 
-- Microsoft Foundry resource quickstart
-- Microsoft Foundry SDK overview for Python
-- Microsoft Foundry quickstart for models and agents
-- Microsoft Foundry agent evaluation guidance
-- microsoft-foundry/foundry-samples
+- [Microsoft Foundry SDKs and Endpoints](https://learn.microsoft.com/azure/foundry/how-to/develop/sdk-overview?tabs=sync&pivots=programming-language-python)
+- [Microsoft Foundry get-started code quickstart](https://learn.microsoft.com/azure/foundry/quickstarts/get-started-code)
+- [Azure AI Agents quickstart](https://learn.microsoft.com/azure/ai-services/agents/quickstart?context=/azure/ai-foundry/context/context)
+- [Microsoft Foundry cloud evaluation guidance](https://learn.microsoft.com/azure/foundry/how-to/develop/cloud-evaluation)
+- [microsoft-foundry/foundry-samples](https://github.com/microsoft-foundry/foundry-samples)
+- [Azure SDK for Python samples for azure-ai-projects](https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/ai/azure-ai-projects/samples)
 
 ## Repository layout
 
@@ -66,6 +70,7 @@ python examples/02-agent-chat/chat_with_agent.py
 python examples/03-agent-eval/evaluate_agent.py
 python examples/04-tool-web-search/web_search_agent.py
 python examples/05-simple-rag/file_search_rag.py
+python examples/06-multi-agent/two_agent_workflow.py
 ```
 
 ## Notes on versions

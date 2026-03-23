@@ -10,8 +10,9 @@ Create the Azure resource group, Foundry resource, Foundry project, and a starte
 
 ## Official references
 
-- Microsoft Foundry resource quickstart
-- Microsoft Foundry portal
+- [Microsoft Foundry portal](https://ai.azure.com/)
+- [Microsoft Foundry SDKs and Endpoints](https://learn.microsoft.com/azure/foundry/how-to/develop/sdk-overview?tabs=sync&pivots=programming-language-python)
+- [Azure AI Agents quickstart](https://learn.microsoft.com/azure/ai-services/agents/quickstart?context=/azure/ai-foundry/context/context)
 
 ## What you will do
 

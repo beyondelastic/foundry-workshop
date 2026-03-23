@@ -10,8 +10,8 @@ Make sure participants can start the hands-on labs without hidden setup gaps.
 
 ## Official references
 
-- Microsoft Foundry SDK overview for Python
-- Microsoft Foundry resource quickstart
+- [Microsoft Foundry SDKs and Endpoints](https://learn.microsoft.com/azure/foundry/how-to/develop/sdk-overview?tabs=sync&pivots=programming-language-python)
+- [Microsoft Foundry portal](https://ai.azure.com/)
 
 ## Checklist
 

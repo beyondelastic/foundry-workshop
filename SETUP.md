@@ -74,6 +74,7 @@ mkdocs serve
 6. Run `examples/03-agent-eval/evaluate_agent.py`
 7. Run `examples/04-tool-web-search/web_search_agent.py`
 8. Run `examples/05-simple-rag/file_search_rag.py`
+9. Run `examples/06-multi-agent/two_agent_workflow.py`
 
 ## 8. Notes for the new labs
 

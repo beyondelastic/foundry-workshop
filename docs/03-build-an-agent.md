@@ -10,9 +10,9 @@ Create a prompt agent version and use it in a multi-turn conversation.
 
 ## Official references
 
-- Microsoft Foundry quickstart: create an agent
-- Microsoft Foundry quickstart: chat with an agent
-- Python samples: `samples/python/quickstart/create-agent/quickstart-create-agent.py` and `samples/python/quickstart/chat-with-agent/quickstart-chat-with-agent.py`
+- [Azure AI Agents quickstart](https://learn.microsoft.com/azure/ai-services/agents/quickstart?context=/azure/ai-foundry/context/context)
+- [Microsoft Foundry SDKs and Endpoints](https://learn.microsoft.com/azure/foundry/how-to/develop/sdk-overview?tabs=sync&pivots=programming-language-python)
+- [Azure SDK for Python agent samples](https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/ai/azure-ai-projects/samples/agents)
 
 ## Exercise flow
 

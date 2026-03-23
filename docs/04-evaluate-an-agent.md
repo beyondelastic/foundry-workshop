@@ -10,8 +10,8 @@ Run a simple evaluation against your agent using a tiny JSONL dataset and built-
 
 ## Official references
 
-- Microsoft Foundry guidance: evaluate your AI agents
-- Python SDK evaluation samples from the Azure SDK repository
+- [Microsoft Foundry cloud evaluation guidance](https://learn.microsoft.com/azure/foundry/how-to/develop/cloud-evaluation)
+- [Azure SDK for Python evaluation samples](https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/ai/azure-ai-projects/samples/evaluations)
 
 ## Exercise
 

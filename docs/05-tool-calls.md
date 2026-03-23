@@ -10,8 +10,9 @@ Add one easy built-in tool to an agent and force the model to use it during resp
 
 ## Official references
 
-- Azure AI Projects Python sample: `sample_agent_web_search.py`
-- Azure AI Projects README sections for agent tools
+- [Azure SDK for Python agent samples](https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/ai/azure-ai-projects/samples/agents)
+- [Microsoft Foundry SDKs and Endpoints](https://learn.microsoft.com/azure/foundry/how-to/develop/sdk-overview?tabs=sync&pivots=programming-language-python)
+- [microsoft-foundry/foundry-samples](https://github.com/microsoft-foundry/foundry-samples)
 
 ## Why this lab exists
 

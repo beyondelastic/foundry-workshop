@@ -1,4 +1,4 @@
-# 07 Stretch Lab: Tracing
+# 08 Stretch Lab: Tracing
 
 ## Goal
 
@@ -10,8 +10,8 @@ Tracing is valuable, but it adds more setup and interpretation than the core wor
 
 ## Official references
 
-- Microsoft Foundry observability guidance for tracing agents
-- Microsoft Foundry monitoring guidance
+- [Microsoft Foundry app tracing guidance](https://learn.microsoft.com/azure/foundry-classic/how-to/develop/trace-application)
+- [Microsoft Foundry SDKs and Endpoints](https://learn.microsoft.com/azure/foundry/how-to/develop/sdk-overview?tabs=sync&pivots=programming-language-python)
 
 ## Suggested exercise
 

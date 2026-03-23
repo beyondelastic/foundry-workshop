@@ -10,8 +10,9 @@ Confirm your Foundry endpoint, authentication, and deployed model all work from 
 
 ## Official references
 
-- Microsoft Foundry quickstart: chat with a model
-- Python sample: `samples/python/quickstart/responses/quickstart-responses.py`
+- [Microsoft Foundry get-started code quickstart](https://learn.microsoft.com/azure/foundry/quickstarts/get-started-code)
+- [Microsoft Foundry SDKs and Endpoints](https://learn.microsoft.com/azure/foundry/how-to/develop/sdk-overview?tabs=sync&pivots=programming-language-python)
+- [Azure SDK for Python responses samples](https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/ai/azure-ai-projects/samples/responses)
 
 ## Exercise
 

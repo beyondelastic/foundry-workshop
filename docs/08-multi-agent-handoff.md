@@ -14,14 +14,14 @@ Show how two Foundry agents can work together on one task, with each agent ownin
 - [Azure SDK for Python agent samples](https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/ai/azure-ai-projects/samples/agents)
 - [Microsoft Agent Framework overview](https://learn.microsoft.com/agent-framework/overview/agent-framework-overview)
 
-## Recommendation
+## Recommended approach
 
-For this workshop, use a simple Python orchestrator with two Foundry prompt agents.
+Use a simple Python orchestrator with two Foundry prompt agents.
 
 Why this approach:
 
 1. It stays consistent with the rest of the workshop.
-2. Participants can see the handoff clearly.
+2. You can see the handoff clearly.
 3. It avoids introducing Agent Framework workflows too early.
 
 Use Agent Framework workflows later when you need explicit branching, retries, checkpoints, or more structured multi-agent routing.
@@ -37,13 +37,13 @@ Another agent uses the local product notes from the RAG lab to recommend one pro
 Run:
 
 ```bash
-python examples/06-multi-agent/two_agent_workflow.py
+python examples/07-multi-agent/two_agent_workflow.py
 ```
 
 ## Example files
 
-- [Open two_agent_workflow.py on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/06-multi-agent/two_agent_workflow.py)
-- [Open product_info.md on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/05-simple-rag/product_info.md)
+- [Open two_agent_workflow.py on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/07-multi-agent/two_agent_workflow.py)
+- [Open product_info.md on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/06-simple-rag/product_info.md)
 
 ## What this lab demonstrates
 
@@ -75,4 +75,4 @@ Use Agent Framework workflows when:
 - you need branching or retries
 - you want durable state or human approval points
 
-For this workshop, the handoff pattern is the right first step. It teaches multi-agent composition without forcing participants to learn a new orchestration framework immediately.
+In this workshop, the handoff pattern is the right first step. It teaches multi-agent composition without forcing you to learn a new orchestration framework immediately.

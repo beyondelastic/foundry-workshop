@@ -14,7 +14,7 @@ Add one easy built-in tool to an agent and force the model to use it during resp
 - [Microsoft Foundry SDKs and Endpoints](https://learn.microsoft.com/azure/foundry/how-to/develop/sdk-overview?tabs=sync&pivots=programming-language-python)
 - [microsoft-foundry/foundry-samples](https://github.com/microsoft-foundry/foundry-samples)
 
-## Why this lab exists
+## Why this lab matters
 
 The earlier labs show plain model calls and prompt agents. This lab shows the next step: an agent can call a tool instead of answering only from its base model knowledge.
 
@@ -27,12 +27,12 @@ This lab uses the built-in `WebSearchTool`, which is simpler than a full MCP app
 Run:
 
 ```bash
-python examples/04-tool-web-search/web_search_agent.py
+python examples/05-tool-web-search/web_search_agent.py
 ```
 
 ## Example file
 
-- [Open web_search_agent.py on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/04-tool-web-search/web_search_agent.py)
+- [Open web_search_agent.py on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/05-tool-web-search/web_search_agent.py)
 
 ## What this lab demonstrates
 

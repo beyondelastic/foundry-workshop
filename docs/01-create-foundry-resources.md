@@ -68,7 +68,7 @@ az cognitiveservices account project create \
   --location swedencentral
 ```
 
-For this workshop, the custom-domain step is not always strictly required if participants create everything in the Foundry portal and only use the project endpoint copied from the portal. It is still included because it matches the official CLI-oriented setup pattern and gives the Azure AI resource a stable, resource-specific endpoint, which avoids confusion in SDK and API flows that reference the underlying Azure AI resource directly.
+If you create everything in the Foundry portal and only use the project endpoint copied from the portal, the custom-domain step is not always strictly required. It is still included here because it matches the official CLI-oriented setup pattern and gives the Azure AI resource a stable, resource-specific endpoint, which avoids confusion in SDK and API flows that reference the underlying Azure AI resource directly.
 
 ## Deploy a model
 
@@ -89,6 +89,7 @@ az cognitiveservices account deployment create \
 ```
 
 `--sku-capacity 10` sets the deployment capacity size for this model; for the workshop, `10` is simply the example throughput allocation used for the starter deployment.
+`--sku-capacity 10` sets the deployment capacity size for this model. Here, `10` is simply the example throughput allocation used for the starter deployment.
 
 ## Capture connection details
 

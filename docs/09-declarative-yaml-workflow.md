@@ -29,7 +29,7 @@ Instead, the pattern is:
 2. Python loads that YAML.
 3. Python provisions and invokes Foundry agents through `AIProjectClient` and the OpenAI-compatible client.
 
-This is the cleanest Foundry-only way to keep workflow intent declarative without introducing another orchestration framework.
+This is a clean Foundry-only way to keep workflow intent declarative without introducing another orchestration framework.
 
 ## Scenario
 
@@ -44,16 +44,16 @@ The workflow is declared in YAML and executed step by step by a small Python run
 Run:
 
 ```bash
-python examples/07-declarative-yaml/run_workflow_from_yaml.py
+python examples/08-declarative-yaml/run_workflow_from_yaml.py
 ```
 
 ## Example files
 
-- [Open agents.yaml on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/07-declarative-yaml/agents.yaml)
-- [Open workflow.yaml on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/07-declarative-yaml/workflow.yaml)
-- [Open run_workflow_from_yaml.py on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/07-declarative-yaml/run_workflow_from_yaml.py)
-- [Open yaml_runtime.py on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/07-declarative-yaml/yaml_runtime.py)
-- [Open gear_notes.md on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/07-declarative-yaml/gear_notes.md)
+- [Open agents.yaml on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/08-declarative-yaml/agents.yaml)
+- [Open workflow.yaml on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/08-declarative-yaml/workflow.yaml)
+- [Open run_workflow_from_yaml.py on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/08-declarative-yaml/run_workflow_from_yaml.py)
+- [Open yaml_runtime.py on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/08-declarative-yaml/yaml_runtime.py)
+- [Open gear_notes.md on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/08-declarative-yaml/gear_notes.md)
 
 ## What this lab demonstrates
 

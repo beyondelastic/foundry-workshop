@@ -2,7 +2,7 @@
 
 ## Goal
 
-Make sure participants can start the hands-on labs without hidden setup gaps.
+Make sure you can start the hands-on labs without hidden setup gaps.
 
 ## Estimated time
 

@@ -2,5 +2,7 @@ azure-ai-projects>=2.0.0
 azure-identity>=1.17.0
 python-dotenv>=1.0.1
 PyYAML>=6.0.2
+azure-monitor-opentelemetry>=1.8.7
+opentelemetry-instrumentation-openai-v2>=2.3b0
 mkdocs>=1.6.0
 mkdocs-material>=9.5.0

@@ -31,8 +31,9 @@ nav:
   - 02 First Model Call: 02-first-model-call.md
   - 03 Build An Agent: 03-build-an-agent.md
   - 04 Evaluate An Agent: 04-evaluate-an-agent.md
-  - 05 Tool Calls: 05-tool-calls.md
-  - 06 Simple RAG: 06-simple-rag.md
-  - 07 Multi-Agent Handoff: 07-multi-agent-handoff.md
-  - 08 Declarative YAML Workflow: 08-declarative-yaml-workflow.md
-  - 09 Stretch Lab: 09-stretch-tracing.md
+  - 05 Observability And Tracing: 05-observability-and-tracing.md
+  - 06 Tool Calls: 06-tool-calls.md
+  - 07 Simple RAG: 07-simple-rag.md
+  - 08 Multi-Agent Handoff: 08-multi-agent-handoff.md
+  - 09 Declarative YAML Workflow: 09-declarative-yaml-workflow.md
+  - 10 Stretch Lab: 10-stretch-tracing.md

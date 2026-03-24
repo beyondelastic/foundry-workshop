@@ -21,6 +21,8 @@ Run the evaluation script:
 python examples/03-agent-eval/evaluate_agent.py
 ```
 
+This lab has two distinct phases. First, the script defines the evaluation itself: what kind of dataset shape is expected and which evaluators should be applied. Second, it starts an evaluation run that feeds your dataset rows to the target agent and records the scores.
+
 ## Example files
 
 - [Open evaluate_agent.py on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/03-agent-eval/evaluate_agent.py)
@@ -34,11 +36,23 @@ python examples/03-agent-eval/evaluate_agent.py
 4. Start an evaluation run that targets your agent.
 5. Poll for completion and print a report URL.
 
+## What is happening under the hood
+
+- `project_client.datasets.upload_file(...)` uploads the local JSONL file so Foundry can use it as evaluation input.
+- `testing_criteria` defines which built-in evaluators should score the agent output. In this lab, the script uses task adherence, coherence, and violence.
+- `data_source_config` tells Foundry what each dataset row looks like. Here, each row is expected to contain a single `query` field.
+- `openai_client.evals.create(...)` creates the evaluation definition. Think of this as registering the evaluation recipe: the name, expected input shape, and scoring criteria. It does not execute the evaluation yet.
+- `openai_client.evals.runs.create(...)` starts a concrete run of that evaluation. This is the step that actually sends each dataset item to your agent and collects the evaluator results.
+- The `target` block inside the run points to your Foundry agent by name, so the evaluation is scoring agent responses rather than direct raw model calls.
+- The polling loop checks the run status until Foundry marks it as `completed` or `failed`, then prints the report URL.
+
+The key line `evaluation = openai_client.evals.create(...)` is important because the returned `evaluation.id` is used by the next step. Without creating the evaluation definition first, there would be no evaluation object for `openai_client.evals.runs.create(...)` to run.
+
 ## Dataset format
 
 The workshop uses a minimal dataset where each line contains a `query` field.
 
-## Suggested discussion points
+## Why these evaluators are a good starting point
 
 - Why task adherence and coherence are useful starter evaluators.
 - Why safety evaluators matter even in simple demos.

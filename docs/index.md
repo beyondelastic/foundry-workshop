@@ -19,7 +19,7 @@ This workshop is intentionally small, practical, and tied to official Microsoft 
   </div>
   <div class="hero-card">
     <h3>Python only</h3>
-    <p>The examples stay in one language so participants can focus on Foundry concepts instead of SDK translation.</p>
+    <p>The examples stay in one language so you can focus on Foundry concepts instead of SDK translation.</p>
   </div>
   <div class="hero-card">
     <h3>Built for beginners</h3>
@@ -34,11 +34,12 @@ This workshop is intentionally small, practical, and tied to official Microsoft 
 3. Send your first model request from Python.
 4. Create a prompt agent and chat with it across turns.
 5. Evaluate that agent with a small dataset.
-6. Add a built-in tool to an agent and force a tool-backed answer.
-7. Build a simple RAG flow with file search over a local document.
-8. Coordinate two agents with different tools on one task.
-9. Use YAML to describe agents and workflow steps, then execute them through the Foundry SDK.
-10. Explore tracing as a stretch lab.
+6. Add simple OpenTelemetry tracing and inspect the trace in Foundry.
+7. Add a built-in tool to an agent and force a tool-backed answer.
+8. Build a simple RAG flow with file search over a local document.
+9. Coordinate two agents with different tools on one task.
+10. Use YAML to describe agents and workflow steps, then execute them through the Foundry SDK.
+11. Explore advanced tracing as a stretch lab.
 
 ## Before you start
 

@@ -72,10 +72,11 @@ mkdocs serve
 4. Run `examples/02-agent-chat/create_agent.py`
 5. Run `examples/02-agent-chat/chat_with_agent.py`
 6. Run `examples/03-agent-eval/evaluate_agent.py`
-7. Run `examples/04-tool-web-search/web_search_agent.py`
-8. Run `examples/05-simple-rag/file_search_rag.py`
-9. Run `examples/06-multi-agent/two_agent_workflow.py`
-10. Run `examples/07-declarative-yaml/run_workflow_from_yaml.py`
+7. Run `examples/04-observability/traced_model_call.py`
+8. Run `examples/05-tool-web-search/web_search_agent.py`
+9. Run `examples/06-simple-rag/file_search_rag.py`
+10. Run `examples/07-multi-agent/two_agent_workflow.py`
+11. Run `examples/08-declarative-yaml/run_workflow_from_yaml.py`
 
 ## 8. Notes for the new labs
 

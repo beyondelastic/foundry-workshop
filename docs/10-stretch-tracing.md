@@ -6,7 +6,7 @@ Extend the basic observability lab with richer tracing once the core workshop fl
 
 ## Why this is a stretch lab
 
-The simple observability lab shows one traced model call and one custom span. This stretch lab is for participants who want to trace more realistic, multi-step flows after the basics are already in place.
+The simple observability lab shows one traced model call and one custom span. This stretch lab is for you if you want to trace more realistic, multi-step flows after the basics are already in place.
 
 ## Official references
 
@@ -27,6 +27,6 @@ The simple observability lab shows one traced model call and one custom span. Th
 - failures or retries
 - conversation flow across requests
 
-## Recommended outcome
+## Expected outcome
 
-Participants leave the workshop knowing that building the happy path is only the start, and that Foundry includes tooling to inspect quality and behavior after the first prototype works.
+After this lab, you should be comfortable treating tracing as part of the normal development loop, not just an optional extra after the happy path works.

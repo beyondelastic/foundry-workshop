@@ -55,8 +55,8 @@ This step uses the agent you created in step 1. Instead of calling the model dir
 - You can see the agent in the Foundry project.
 - The same conversation carries context into the second turn.
 
-## Instructor note
+## Common confusion
 
-This is the first lab where participants usually confuse the model deployment name with the agent name. Keep those separate in `.env`.
+This is the first lab where it is easy to confuse the model deployment name with the agent name. Keep those separate in `.env`.
 
-If participants want to rename the agent, they should update `AZURE_AI_AGENT_NAME` in `.env`, not the model deployment name.
+If you want to rename the agent, update `AZURE_AI_AGENT_NAME` in `.env`, not the model deployment name.

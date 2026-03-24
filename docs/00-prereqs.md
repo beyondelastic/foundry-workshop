@@ -15,6 +15,7 @@ Make sure participants can start the hands-on labs without hidden setup gaps.
 
 ## Checklist
 
+- This repository is cloned locally, or you have forked it and cloned your fork, so the example files are available on your machine.
 - Azure subscription is active.
 - Azure CLI is installed and `az login` works.
 - Python 3.10 or newer is installed.

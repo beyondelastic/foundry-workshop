@@ -22,6 +22,8 @@ markdown_extensions:
   - tables
 extra_css:
   - assets/stylesheets/extra.css
+extra_javascript:
+  - assets/javascripts/external-links.js
 nav:
   - Home: index.md
   - 00 Prerequisites: 00-prereqs.md
@@ -32,4 +34,5 @@ nav:
   - 05 Tool Calls: 05-tool-calls.md
   - 06 Simple RAG: 06-simple-rag.md
   - 07 Multi-Agent Handoff: 07-multi-agent-handoff.md
-  - 08 Stretch Lab: 08-stretch-tracing.md
+  - 08 Declarative YAML Workflow: 08-declarative-yaml-workflow.md
+  - 09 Stretch Lab: 09-stretch-tracing.md

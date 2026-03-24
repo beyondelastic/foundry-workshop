@@ -14,7 +14,8 @@ GitHub repository: [beyondelastic/foundry-workshop](https://github.com/beyondela
 6. Use a built-in tool from a prompt agent.
 7. Build a simple RAG flow with file search.
 8. Coordinate two agents on one task with different tools.
-9. Explore one stretch topic for observability.
+9. Define agents and a workflow in YAML and execute them through the Foundry SDK.
+10. Explore one stretch topic for observability.
 
 ## Design goals
 
@@ -71,6 +72,7 @@ python examples/03-agent-eval/evaluate_agent.py
 python examples/04-tool-web-search/web_search_agent.py
 python examples/05-simple-rag/file_search_rag.py
 python examples/06-multi-agent/two_agent_workflow.py
+python examples/07-declarative-yaml/run_workflow_from_yaml.py
 ```
 
 ## Notes on versions

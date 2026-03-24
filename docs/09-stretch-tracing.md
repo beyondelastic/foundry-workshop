@@ -1,4 +1,4 @@
-# 08 Stretch Lab: Tracing
+# 09 Stretch Lab: Tracing
 
 ## Goal
 

@@ -24,6 +24,10 @@ python examples/02-agent-chat/create_agent.py
 
 [Open create_agent.py on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/02-agent-chat/create_agent.py)
 
+This step does not chat with the model yet. It creates a prompt-based agent version inside your Foundry project by combining three things: the project endpoint, the deployed model name, and the agent instructions. In this script, `PromptAgentDefinition(...)` tells Foundry which deployed model the agent should use and what system-style behavior it should follow.
+
+The script reads the agent name from `AZURE_AI_AGENT_NAME` in your `.env` file. If you want the agent to appear under a different name in Foundry, change that value in `.env` before running the script.
+
 ### Step 2: chat with the agent
 
 ```bash
@@ -31,6 +35,8 @@ python examples/02-agent-chat/chat_with_agent.py
 ```
 
 [Open chat_with_agent.py on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/02-agent-chat/chat_with_agent.py)
+
+This step uses the agent you created in step 1. Instead of calling the model directly, the script creates a conversation and sends messages through the agent reference, so the reply is generated with the agent's instructions applied. Because the script keeps the same conversation object across turns, the second question can use the context from the first question.
 
 ## What this lab demonstrates
 
@@ -52,3 +58,5 @@ python examples/02-agent-chat/chat_with_agent.py
 ## Instructor note
 
 This is the first lab where participants usually confuse the model deployment name with the agent name. Keep those separate in `.env`.
+
+If participants want to rename the agent, they should update `AZURE_AI_AGENT_NAME` in `.env`, not the model deployment name.

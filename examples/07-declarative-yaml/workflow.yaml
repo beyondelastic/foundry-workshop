@@ -1,0 +1,26 @@
+version: 1
+workflow:
+  name: city_break_packing_workflow
+  description: Two-step Foundry workflow declared in YAML and executed through Python.
+  input: >-
+    A participant is planning a three-day rainy spring city break in Amsterdam
+    and wants one gear recommendation from the catalog.
+  steps:
+    - id: research
+      agent: city_researcher
+      prompt: |-
+        Scenario: {{ workflow_input }}
+
+        Find recent public guidance for what matters most on this type of trip.
+        Return exactly three bullets.
+
+    - id: recommend
+      agent: packing_advisor
+      prompt: |-
+        Scenario: {{ workflow_input }}
+
+        Research notes:
+        {{ steps.research.output }}
+
+        Using only the uploaded gear catalog, recommend exactly one item.
+        Explain the choice in three bullets and include the price.

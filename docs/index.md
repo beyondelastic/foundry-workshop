@@ -37,10 +37,12 @@ This workshop is intentionally small, practical, and tied to official Microsoft 
 6. Add a built-in tool to an agent and force a tool-backed answer.
 7. Build a simple RAG flow with file search over a local document.
 8. Coordinate two agents with different tools on one task.
-9. Explore tracing as a stretch lab.
+9. Use YAML to describe agents and workflow steps, then execute them through the Foundry SDK.
+10. Explore tracing as a stretch lab.
 
 ## Before you start
 
+- Clone this repository, or fork it and clone your fork, so you can run the local example files during the workshop.
 - Complete the steps in `SETUP.md`.
 - Verify you can sign in with the Azure CLI.
 - Confirm you know your Foundry project endpoint.
@@ -57,3 +59,4 @@ By the end of the core labs, you should be able to:
 - use a built-in agent tool for a grounded response
 - ground an agent answer against uploaded document content
 - coordinate two agents through a simple Python orchestrator
+- execute a declarative YAML workflow through Foundry SDK calls

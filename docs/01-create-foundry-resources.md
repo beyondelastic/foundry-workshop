@@ -26,32 +26,55 @@ Create the Azure resource group, Foundry resource, Foundry project, and a starte
 
 The official quickstart uses a flow similar to this:
 
+If `az cognitiveservices account create` reports `unrecognized arguments: --allow-project-management`, your Azure CLI is too old for this flow. Run `az upgrade` and retry.
+
+- Create the resource group that will contain the Foundry resources.
+
 ```bash
-az group create --name my-foundry-rg --location eastus
+az group create --name my-foundry-rg --location swedencentral
+```
+
+- Create the Azure AI Services resource that backs the Foundry account and enables project management.
+
+```bash
 
 az cognitiveservices account create \
   --name my-foundry-resource \
   --resource-group my-foundry-rg \
   --kind AIServices \
   --sku s0 \
-  --location eastus \
+  --location swedencentral \
   --allow-project-management
+```
+
+- Assign a stable custom subdomain for the Azure AI resource endpoint.
+
+```bash
 
 az cognitiveservices account update \
   --name my-foundry-resource \
   --resource-group my-foundry-rg \
   --custom-domain my-foundry-resource
+```
+
+- Create the Foundry project inside the Azure AI resource.
+
+```bash
 
 az cognitiveservices account project create \
   --name my-foundry-resource \
   --resource-group my-foundry-rg \
   --project-name my-foundry-project \
-  --location eastus
+  --location swedencentral
 ```
+
+For this workshop, the custom-domain step is not always strictly required if participants create everything in the Foundry portal and only use the project endpoint copied from the portal. It is still included because it matches the official CLI-oriented setup pattern and gives the Azure AI resource a stable, resource-specific endpoint, which avoids confusion in SDK and API flows that reference the underlying Azure AI resource directly.
 
 ## Deploy a model
 
 The official quickstart example uses `gpt-4.1-mini`. You can also choose another supported model available in your region.
+
+- Deploy a starter model that the workshop scripts can call.
 
 ```bash
 az cognitiveservices account deployment create \
@@ -65,9 +88,13 @@ az cognitiveservices account deployment create \
   --sku-name Standard
 ```
 
+`--sku-capacity 10` sets the deployment capacity size for this model; for the workshop, `10` is simply the example throughput allocation used for the starter deployment.
+
 ## Capture connection details
 
 In the Foundry portal, copy:
+
+You can find the project endpoint by clicking `Home` in Foundry, then opening your project where the endpoint is shown for SDK and API usage.
 
 - your project endpoint
 - your deployed model name

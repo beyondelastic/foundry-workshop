@@ -75,6 +75,7 @@ mkdocs serve
 7. Run `examples/04-tool-web-search/web_search_agent.py`
 8. Run `examples/05-simple-rag/file_search_rag.py`
 9. Run `examples/06-multi-agent/two_agent_workflow.py`
+10. Run `examples/07-declarative-yaml/run_workflow_from_yaml.py`
 
 ## 8. Notes for the new labs
 

@@ -1,26 +1,38 @@
 version: 1
 agents:
-  - id: city_researcher
-    foundry_name: WorkshopYamlCityResearchAgent
-    description: Researches current public guidance for short city trips.
-    instructions: >-
-      You are a travel research assistant. Use web search to gather concise,
-      recent guidance for city-break planning. Return short, factual notes.
-    tools:
-      - type: web_search
-        location:
-          country: GB
-          city: London
-          region: London
+  - object: agent.version
+    id: WorkshopFoundryWorkflowResearchAgent:1
+    name: WorkshopFoundryWorkflowResearchAgent
+    version: "1"
+    description: Research agent for the native Foundry workflow lab.
+    definition:
+      kind: prompt
+      model: __MODEL_DEPLOYMENT_NAME__
+      instructions: >-
+        You are a travel research assistant. Use web search to gather concise,
+        recent guidance for city-break planning. Return exactly three short
+        bullets.
+      tools:
+        - type: web_search
+          user_location:
+            country: NL
+            city: Amsterdam
+            region: Noord-Holland
 
-  - id: packing_advisor
-    foundry_name: WorkshopYamlPackingAdvisorAgent
-    description: Recommends exactly one catalog item based on trip conditions.
-    instructions: >-
-      You are a packing assistant. Use the uploaded gear catalog to recommend
-      exactly one item. Base your recommendation on the scenario and the
-      research notes you receive.
-    tools:
-      - type: file_search
-        files:
-          - gear_notes.md
+  - object: agent.version
+    id: WorkshopFoundryWorkflowPackingAgent:1
+    name: WorkshopFoundryWorkflowPackingAgent
+    version: "1"
+    description: Packing agent for the native Foundry workflow lab.
+    definition:
+      kind: prompt
+      model: __MODEL_DEPLOYMENT_NAME__
+      instructions: >-
+        You are a packing assistant. Use the uploaded gear catalog to recommend
+        exactly one item. Base your answer on the scenario and the research
+        notes you receive.
+      tools:
+        - type: file_search
+          vector_store_name: WorkshopFoundryWorkflowPackingStore
+          files:
+            - gear_notes.md

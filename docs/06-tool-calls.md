@@ -45,7 +45,7 @@ By default, this script now keeps the created agent so participants can inspect 
 
 ## What is happening when you run it
 
-The script creates a temporary prompt agent version named `WorkshopWebSearchAgent`. That agent uses the same model deployment as the earlier labs, but it now includes a built-in `WebSearchTool` in its definition.
+The script creates a prompt agent version named `WorkshopWebSearchAgent`. That agent uses the same model deployment as the earlier labs, but it now includes a built-in `WebSearchTool` in its definition.
 
 When the script sends the question through `responses.create(...)` with `agent_reference`, Foundry routes the request to that agent instead of calling the base model directly. The model sees the agent instructions, notices that the prompt asks for recent public information, and decides to call the web search tool.
 
@@ -64,7 +64,7 @@ The response should return a recent public result from web search instead of rel
 - The script reports that the web search tool was used.
 - The agent remains available by default for later use in the Foundry UI.
 
-## Why the sample deletes the agent
+## Why the sample keeps the agent
 
 Keeping the agent is now the default workshop behavior.
 

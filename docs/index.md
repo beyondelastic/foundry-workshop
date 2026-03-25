@@ -38,7 +38,7 @@ This workshop is intentionally small, practical, and tied to official Microsoft 
 7. Add a built-in tool to an agent and inspect a tool-backed answer.
 8. Build a simple RAG flow with file search over a local document.
 9. Coordinate two agents through a simple Python handoff.
-10. Use YAML to describe agents and workflow steps, then execute them through the Foundry SDK.
+10. Create and invoke a native Foundry workflow that coordinates multiple agents.
 
 ## Before you start
 
@@ -59,4 +59,4 @@ By the end of the core labs, you should be able to:
 - use a built-in agent tool for a grounded response
 - ground an agent answer against uploaded document content
 - coordinate two agents through a simple Python orchestrator and explicit handoff
-- execute a declarative YAML workflow through Foundry SDK calls
+- prepare and invoke a native Foundry workflow from Python

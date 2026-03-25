@@ -95,17 +95,13 @@ The second agent uses those notes plus the uploaded product file to recommend on
 - The final answer references the catalog information.
 - Both agents and the vector store remain available by default for later use.
 
-## Why the sample now keeps the resources
+## Additional resource note
 
-Keeping the agents is the better default for workshop participants because the Foundry UI is part of the learning flow. Participants can inspect both agents after the run, compare their instructions and tools, and continue using them without rerunning the full script immediately.
+This lab keeps two agents instead of one, plus the supporting product vector store used by the second agent.
 
-The same applies to the vector store used by the product agent. If the agent stayed but the vector store were deleted, the saved agent would no longer be useful for the grounded recommendation step.
-
-The script is still safe to rerun multiple times. The product vector store is created once and then reused on later runs, while agent creation still uses versioning so participants can iterate without first deleting earlier agent versions.
+That vector store is reused on later runs, so reruns do not keep creating new indexes.
 
 If you update `product_info.md` and want the grounded data refreshed, delete the existing workshop vector store in Foundry and rerun the script.
-
-If you want the older disposable behavior for a clean demo run, set `KEEP_AGENT=false` and the script will delete both agent versions and the vector store at the end.
 
 ## When to use workflows instead
 

@@ -35,4 +35,4 @@ nav:
   - 06 Tool Calls: 06-tool-calls.md
   - 07 Simple RAG: 07-simple-rag.md
   - 08 Two-Agent Orchestration: 08-multi-agent-handoff.md
-  - 09 Declarative YAML Workflow: 09-declarative-yaml-workflow.md
+  - 09 Native Foundry Workflow: 09-declarative-yaml-workflow.md

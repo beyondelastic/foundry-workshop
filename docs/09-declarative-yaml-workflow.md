@@ -1,8 +1,8 @@
-# 09 Declarative YAML Workflow
+# 09 Native Foundry Workflow
 
 ## Goal
 
-Define two agents and a simple workflow in YAML, then execute that declarative definition through Python code that uses only Foundry SDK APIs.
+Use a native Foundry workflow for a two-step city-break scenario, then invoke that workflow from Python.
 
 ## Estimated time
 
@@ -11,97 +11,180 @@ Define two agents and a simple workflow in YAML, then execute that declarative d
 ## Official references
 
 - [Microsoft Foundry SDKs and Endpoints](https://learn.microsoft.com/azure/foundry/how-to/develop/sdk-overview?tabs=sync&pivots=programming-language-python)
-- [Microsoft Foundry get-started code quickstart](https://learn.microsoft.com/azure/foundry/quickstarts/get-started-code)
+- [Microsoft Agent Framework workflows overview](https://learn.microsoft.com/agent-framework/workflows/)
 - [Azure SDK for Python agent samples](https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/ai/azure-ai-projects/samples/agents)
 - [microsoft-foundry/foundry-samples](https://github.com/microsoft-foundry/foundry-samples)
 
 ## What this lab is and is not
 
-This lab uses YAML as a declarative configuration format.
+This lab uses a native Foundry workflow YAML.
 
-It does **not** rely on Microsoft Agent Framework.
+It does **not** use a custom Python workflow runner.
 
-It also does **not** assume that the Foundry SDK natively executes YAML workflow files.
+It also does **not** treat workflow YAML as a local configuration file that only this repository understands.
 
 Instead, the pattern is:
 
-1. YAML defines the agents and workflow steps.
-2. Python loads that YAML.
-3. Python provisions and invokes Foundry agents through `AIProjectClient` and the OpenAI-compatible client.
+1. Python prepares the agents that the workflow will invoke.
+2. Foundry stores and manages the workflow resource.
+3. Python invokes that workflow through the Foundry project endpoint.
 
-This is a clean Foundry-only way to keep workflow intent declarative without introducing another orchestration framework.
+This is the platform-managed workflow approach rather than the Python-managed orchestration approach.
 
 ## Scenario
 
-One agent researches what matters for a rainy spring city break.
+One workflow step asks a research agent for current city-break guidance.
 
-Another agent uses a local gear catalog to recommend exactly one item.
+A second workflow step asks a packing agent to recommend exactly one catalog item based on that research.
 
-The workflow is declared in YAML and executed step by step by a small Python runtime.
+Foundry owns the workflow definition and executes the workflow actions.
 
 ## Exercise
 
-Run:
+1. Prepare the agents used by the workflow:
 
 ```bash
-python examples/08-declarative-yaml/run_workflow_from_yaml.py
+python examples/08-declarative-yaml/prepare_workflow_agents.py
 ```
 
-By default, this script now keeps the created agents and reuses any supporting workshop vector stores on later reruns so participants can inspect the resulting resources in Foundry after the run. To restore the older cleanup behavior for a one-off demo run, set `KEEP_AGENT=false` in your `.env` file.
+2. In the Foundry portal, open the `Workflows` experience, create a workflow, and paste the contents of `examples/08-declarative-yaml/workflow.yaml` into the workflow editor.
+
+3. Invoke the saved workflow from Python:
+
+```bash
+python examples/08-declarative-yaml/invoke_foundry_workflow.py
+```
+
+If you want the full event stream for troubleshooting, run:
+
+```bash
+WORKFLOW_VERBOSE=true python examples/08-declarative-yaml/invoke_foundry_workflow.py
+```
+
+Set `AZURE_AI_WORKFLOW_NAME` in `.env` only if you save the workflow under a different name than the provided default.
 
 ## Example files
 
 - [Open agents.yaml on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/08-declarative-yaml/agents.yaml)
 - [Open workflow.yaml on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/08-declarative-yaml/workflow.yaml)
-- [Open run_workflow_from_yaml.py on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/08-declarative-yaml/run_workflow_from_yaml.py)
-- [Open yaml_runtime.py on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/08-declarative-yaml/yaml_runtime.py)
+- [Open prepare_workflow_agents.py on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/08-declarative-yaml/prepare_workflow_agents.py)
+- [Open invoke_foundry_workflow.py on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/08-declarative-yaml/invoke_foundry_workflow.py)
 - [Open gear_notes.md on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/08-declarative-yaml/gear_notes.md)
+
+## What each file is doing
+
+`agents.yaml` defines the supporting agent versions in YAML.
+
+This is the agent-side equivalent of the workflow definition. It keeps the agent name, description, prompt definition, and tool configuration in one declarative file instead of hardcoding those values directly in Python.
+
+The workshop version is intentionally close to the shape you see in the Foundry UI export. The setup script accepts either a file containing an `agents:` list or a single exported `object: agent.version` record.
+
+It also uses one small workshop-friendly extension for file search: `vector_store_name` plus `files`. That lets the setup script create or reuse the correct vector store in each environment instead of hardcoding a store ID that only works in one project.
+
+`workflow.yaml` is now a real Foundry workflow definition.
+
+It uses workflow actions like `SetVariable`, `InvokeAzureAgent`, `SendActivity`, and `EndConversation`. That means the YAML is meant for the Foundry workflow system itself, not for a local Python parser in this repository.
+
+In this sample:
+
+1. the workflow stores the trip scenario in a workflow variable
+2. it invokes the research agent
+3. it invokes the packing agent with the research output
+4. it sends the final answer back to the conversation
+
+`prepare_workflow_agents.py` creates the agents that the workflow references.
+
+The workflow YAML refers to agent names, so those agents must already exist in Foundry. This script creates or updates:
+
+1. `WorkshopFoundryWorkflowResearchAgent`
+2. `WorkshopFoundryWorkflowPackingAgent`
+
+The script now reads those definitions from `agents.yaml`, resolves any file-search vector stores, and then creates the corresponding Foundry prompt agent versions.
+
+`invoke_foundry_workflow.py` is the Python client that runs the workflow.
+
+It does not interpret workflow YAML. It simply opens a conversation, invokes the workflow by name through `agent_reference`, and prints a concise transcript of the agent messages in order.
+
+If you set `WORKFLOW_VERBOSE=true`, it switches to a streamed troubleshooting view that prints workflow actions and lower-level response events.
+
+`gear_notes.md` is the local grounding file.
+
+This is the catalog used by the packing agent. It is not the workflow. It is the data source that the packing agent retrieves from when making its recommendation.
+
+## What happens when you run it
+
+The easiest way to understand this lab is to split it into three phases.
+
+The execution flow is:
+
+1. `prepare_workflow_agents.py` creates or updates the research and packing agents.
+2. You save `workflow.yaml` in the Foundry workflow editor so Foundry has a real workflow resource.
+3. `invoke_foundry_workflow.py` starts a conversation and invokes that workflow.
+
+Once the workflow is running, Foundry performs the orchestration itself:
+
+1. the workflow trigger starts on conversation start
+2. a workflow variable is initialized with the trip scenario
+3. Foundry invokes the research agent
+4. the research output is stored in a workflow variable
+5. Foundry invokes the packing agent with that research output included in the next prompt
+6. the final recommendation is sent back to the conversation
+
+That is the important difference from the old lab: Foundry now owns the step order and action execution.
+
+## Why this is useful
+
+This pattern shows what changes when you move from application-managed orchestration to platform-managed orchestration.
+
+You can change different concerns in different files:
+
+1. change the workflow structure in `workflow.yaml`
+2. change the agent definitions in `prepare_workflow_agents.py`
+3. change the local grounding data in `gear_notes.md`
+4. change the invocation client in `invoke_foundry_workflow.py`
+
+That separation makes it easier to see which logic belongs to Foundry and which logic belongs to your client code.
 
 ## What this lab demonstrates
 
-1. Declare agent roles and tools in YAML.
-2. Declare workflow steps and prompt handoffs in YAML.
-3. Load that configuration in Python.
-4. Create Foundry prompt agents from the YAML definitions.
-5. Execute each workflow step in order.
-6. Keep the created agents and vector stores by default so they can be inspected and reused after the run.
+1. Create Foundry agents that a workflow can invoke.
+2. Define a native Foundry workflow in YAML.
+3. Use workflow actions and workflow variables instead of a custom Python loop.
+4. Invoke the workflow from Python and inspect streamed workflow events.
+5. Keep the supporting agents and vector store available for later inspection and reuse.
 
 ## Expected result
 
-The first step prints research notes.
-
-The second step prints a final gear recommendation grounded in the local catalog.
+The streamed output shows workflow actions running, followed by a final gear recommendation grounded in the local catalog.
 
 ## Verification
 
-- YAML loads successfully.
-- Both agents are created.
-- The workflow runner prints each step output.
+- The workflow is saved successfully in Foundry.
+- Both supporting agents exist in Foundry.
+- The invocation script starts a conversation and runs the workflow.
 - The final output reflects both web research and local grounding.
-- The created agents and vector stores remain available by default for later use.
+- The supporting agents and vector store remain available for later use.
 
-## Resource lifetime
+## Additional resource note
 
-This workflow lab now defaults to keeping the created agents and any supporting vector stores. That makes it easier for participants to inspect the declarative setup in Foundry after the workflow completes and compare what was defined in YAML with what was provisioned in the project.
+This lab keeps the two supporting agents and the packing agent's vector store so the workflow can be invoked again without recreating its dependencies every time.
 
-The runtime is safe to rerun multiple times. File-search vector stores are created once per workshop agent and then reused on later runs, while agent creation still uses versioning, so repeated runs do not require manual cleanup just to keep working.
+That vector store is reused on later runs, so reruns do not keep creating new indexes.
 
-If you change one of the local markdown files used by the YAML agents and want the index rebuilt, delete the corresponding workshop vector store in Foundry and rerun the workflow.
+If you change `gear_notes.md` and want the index rebuilt, delete the existing workflow vector store in Foundry and run `prepare_workflow_agents.py` again.
 
-## Why you do not see a Foundry workflow
+## Why you now see a Foundry workflow
 
-That is expected here too.
+With this replacement lab, you should now see a real workflow in the Foundry `Workflows` tab after you save `workflow.yaml` there.
 
-This lab executes a YAML-defined workflow through Python code, but it does not register a native Foundry workflow resource in the portal. In the UI you will see the agents and any supporting indexes, but not a workflow object.
-
-If you want the older disposable behavior for a clean demo run, set `KEEP_AGENT=false` and the runtime will delete the created agents and vector stores at the end.
+That is the main architectural difference from the earlier version of lab 09. The old lab only used a local Python runner. This version uses a native workflow definition that Foundry itself can store and execute.
 
 ## Why this matters
 
-This lab shows how declarative configuration can fit into a Foundry-first architecture even when the orchestration runtime is still plain Python.
+This lab shows the difference between invoking agents directly and building a platform-managed workflow that can coordinate those agents for you.
 
 That is often the right middle ground when you want:
 
-- YAML for readability and review
-- Foundry APIs for execution
-- no dependency on Agent Framework
+- a workflow visible in Foundry
+- explicit workflow actions and variables
+- a lightweight Python client that invokes the workflow instead of implementing it

@@ -47,6 +47,8 @@ Run:
 python examples/08-declarative-yaml/run_workflow_from_yaml.py
 ```
 
+By default, this script now keeps the created agents and reuses any supporting workshop vector stores on later reruns so participants can inspect the resulting resources in Foundry after the run. To restore the older cleanup behavior for a one-off demo run, set `KEEP_AGENT=false` in your `.env` file.
+
 ## Example files
 
 - [Open agents.yaml on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/08-declarative-yaml/agents.yaml)
@@ -62,7 +64,7 @@ python examples/08-declarative-yaml/run_workflow_from_yaml.py
 3. Load that configuration in Python.
 4. Create Foundry prompt agents from the YAML definitions.
 5. Execute each workflow step in order.
-6. Clean up the temporary agents and vector stores.
+6. Keep the created agents and vector stores by default so they can be inspected and reused after the run.
 
 ## Expected result
 
@@ -76,7 +78,23 @@ The second step prints a final gear recommendation grounded in the local catalog
 - Both agents are created.
 - The workflow runner prints each step output.
 - The final output reflects both web research and local grounding.
-- Cleanup completes successfully.
+- The created agents and vector stores remain available by default for later use.
+
+## Resource lifetime
+
+This workflow lab now defaults to keeping the created agents and any supporting vector stores. That makes it easier for participants to inspect the declarative setup in Foundry after the workflow completes and compare what was defined in YAML with what was provisioned in the project.
+
+The runtime is safe to rerun multiple times. File-search vector stores are created once per workshop agent and then reused on later runs, while agent creation still uses versioning, so repeated runs do not require manual cleanup just to keep working.
+
+If you change one of the local markdown files used by the YAML agents and want the index rebuilt, delete the corresponding workshop vector store in Foundry and rerun the workflow.
+
+## Why you do not see a Foundry workflow
+
+That is expected here too.
+
+This lab executes a YAML-defined workflow through Python code, but it does not register a native Foundry workflow resource in the portal. In the UI you will see the agents and any supporting indexes, but not a workflow object.
+
+If you want the older disposable behavior for a clean demo run, set `KEEP_AGENT=false` and the runtime will delete the created agents and vector stores at the end.
 
 ## Why this matters
 

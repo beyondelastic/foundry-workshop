@@ -20,6 +20,29 @@ def get_env(name: str, fallback: str | None = None) -> str:
     return value
 
 
+def get_keep_agent_setting() -> bool:
+    value = os.getenv("KEEP_AGENT", "true").strip().lower()
+    return value not in {"0", "false", "no", "off"}
+
+
+def get_or_create_vector_store(openai_client, store_name: str, file_path: Path):
+    for vector_store in openai_client.vector_stores.list(limit=100, order="desc"):
+        if vector_store.name == store_name:
+            print(f"Vector store reused: {vector_store.id}")
+            return vector_store, False
+
+    vector_store = openai_client.vector_stores.create(name=store_name)
+    print(f"Vector store created: {vector_store.id}")
+
+    with file_path.open("rb") as file_handle:
+        openai_client.vector_stores.files.upload_and_poll(
+            vector_store_id=vector_store.id,
+            file=file_handle,
+        )
+
+    return vector_store, True
+
+
 def run_agent(openai_client, agent_name: str, prompt: str) -> str:
     conversation = openai_client.conversations.create()
     response = openai_client.responses.create(
@@ -37,21 +60,22 @@ def main() -> None:
     model_deployment_name = get_env(
         "AZURE_AI_MODEL_DEPLOYMENT_NAME", "MODEL_DEPLOYMENT_NAME"
     )
+    keep_agent = get_keep_agent_setting()
     product_file_path = (
         Path(__file__).resolve().parents[1] / "06-simple-rag" / "product_info.md"
     )
+    vector_store_name = "WorkshopMultiAgentStore"
 
     with (
         DefaultAzureCredential() as credential,
         AIProjectClient(endpoint=project_endpoint, credential=credential) as project_client,
         project_client.get_openai_client() as openai_client,
     ):
-        vector_store = openai_client.vector_stores.create(name="WorkshopMultiAgentStore")
-        with product_file_path.open("rb") as file_handle:
-            openai_client.vector_stores.files.upload_and_poll(
-                vector_store_id=vector_store.id,
-                file=file_handle,
-            )
+        vector_store, created_vector_store = get_or_create_vector_store(
+            openai_client,
+            vector_store_name,
+            product_file_path,
+        )
 
         research_agent = project_client.agents.create_version(
             agent_name="WorkshopResearchAgent",
@@ -115,15 +139,24 @@ def main() -> None:
             print("\nProduct agent output:\n")
             print(final_recommendation)
         finally:
-            project_client.agents.delete_version(
-                agent_name=research_agent.name,
-                agent_version=research_agent.version,
-            )
-            project_client.agents.delete_version(
-                agent_name=product_agent.name,
-                agent_version=product_agent.version,
-            )
-            openai_client.vector_stores.delete(vector_store.id)
+            if keep_agent:
+                print(
+                    f"\nAgents kept: {research_agent.name} (version {research_agent.version}), {product_agent.name} (version {product_agent.version})"
+                )
+                print(
+                    f"Vector store kept: {vector_store.id}. Set KEEP_AGENT=false to restore cleanup behavior."
+                )
+            else:
+                project_client.agents.delete_version(
+                    agent_name=research_agent.name,
+                    agent_version=research_agent.version,
+                )
+                project_client.agents.delete_version(
+                    agent_name=product_agent.name,
+                    agent_version=product_agent.version,
+                )
+                if created_vector_store:
+                    openai_client.vector_stores.delete(vector_store.id)
 
 
 if __name__ == "__main__":

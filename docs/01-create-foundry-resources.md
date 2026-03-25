@@ -84,12 +84,13 @@ az cognitiveservices account deployment create \
   --model-name gpt-4.1-mini \
   --model-version "2025-04-14" \
   --model-format OpenAI \
-  --sku-capacity 10 \
+  --sku-capacity 30 \
   --sku-name Standard
 ```
 
-`--sku-capacity 10` sets the deployment capacity size for this model; for the workshop, `10` is simply the example throughput allocation used for the starter deployment.
-`--sku-capacity 10` sets the deployment capacity size for this model. Here, `10` is simply the example throughput allocation used for the starter deployment.
+`--sku-capacity 30` sets a larger starter throughput allocation for the workshop so participants have more headroom for repeated runs and multi-step agent examples.
+
+If your available quota is small, you can lower this value. If you expect several participants to share one deployment or to rerun the later labs quickly, increase it further as your region quota allows.
 
 ## Capture connection details
 

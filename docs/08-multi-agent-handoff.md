@@ -49,6 +49,8 @@ Run:
 python examples/07-multi-agent/two_agent_workflow.py
 ```
 
+By default, this script now keeps both agents and reuses the same supporting vector store on later reruns so participants can inspect them and continue experimenting in Foundry after the Python run finishes. To restore the older cleanup behavior for a one-off demo run, set `KEEP_AGENT=false` in your `.env` file.
+
 ## Example files
 
 - [Open two_agent_workflow.py on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/07-multi-agent/two_agent_workflow.py)
@@ -91,7 +93,19 @@ The second agent uses those notes plus the uploaded product file to recommend on
 - Both agents are created successfully.
 - The research output is printed first.
 - The final answer references the catalog information.
-- Cleanup removes both agents and the vector store.
+- Both agents and the vector store remain available by default for later use.
+
+## Why the sample now keeps the resources
+
+Keeping the agents is the better default for workshop participants because the Foundry UI is part of the learning flow. Participants can inspect both agents after the run, compare their instructions and tools, and continue using them without rerunning the full script immediately.
+
+The same applies to the vector store used by the product agent. If the agent stayed but the vector store were deleted, the saved agent would no longer be useful for the grounded recommendation step.
+
+The script is still safe to rerun multiple times. The product vector store is created once and then reused on later runs, while agent creation still uses versioning so participants can iterate without first deleting earlier agent versions.
+
+If you update `product_info.md` and want the grounded data refreshed, delete the existing workshop vector store in Foundry and rerun the script.
+
+If you want the older disposable behavior for a clean demo run, set `KEEP_AGENT=false` and the script will delete both agent versions and the vector store at the end.
 
 ## When to use workflows instead
 
@@ -103,3 +117,9 @@ Use Agent Framework workflows when:
 - you want durable state or human approval points
 
 In this workshop, the handoff pattern is the right first step. It teaches multi-agent composition without forcing you to learn a new orchestration framework immediately.
+
+## Why you do not see a Foundry workflow
+
+That is expected in this workshop.
+
+The multi-agent and YAML labs use Python to orchestrate prompt agents, but they do not create native Foundry workflow resources. The YAML lab is declarative in your source files, not in the Foundry portal's workflow system, so you will see agents, files, and indexes in the UI but no workflow entry.

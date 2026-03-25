@@ -30,6 +30,8 @@ Run:
 python examples/05-tool-web-search/web_search_agent.py
 ```
 
+By default, this script now keeps the created agent so participants can inspect and reuse it later in Foundry. To restore the older cleanup behavior for a one-off demo run, set `KEEP_AGENT=false` in your `.env` file.
+
 ## Example file
 
 - [Open web_search_agent.py on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/05-tool-web-search/web_search_agent.py)
@@ -60,17 +62,17 @@ The response should return a recent public result from web search instead of rel
 - The script creates an agent successfully.
 - The agent returns a grounded answer to the web query.
 - The script reports that the web search tool was used.
-- The example cleans up the agent version afterward.
+- The agent remains available by default for later use in the Foundry UI.
 
 ## Why the sample deletes the agent
 
-Deleting the agent at the end is a workshop convenience, not a strict requirement.
+Keeping the agent is now the default workshop behavior.
 
-For a teaching sample, cleanup is useful because it keeps the Foundry project tidy and makes the script repeatable. Each run starts from the same known state, and participants do not end up with many nearly identical workshop agent versions in the portal.
+That makes it easier for participants to inspect the agent in the Foundry UI and continue experimenting after the script finishes.
 
-Keeping the agent is also a valid choice if you want to experiment with it across multiple runs, inspect it in the portal, or compare versions over time. That is usually the better option once you move beyond the workshop and start treating the agent as something you want to iterate on.
+The script is still safe to rerun multiple times. Each rerun creates a new version under the same agent name, so participants can keep iterating without manually deleting the earlier one first.
 
-So the practical guidance is simple: delete it for a clean, reproducible demo; keep it if you want to reuse or inspect it after the script finishes.
+If you want a clean, disposable run instead, set `KEEP_AGENT=false` and the script will delete the created agent version at the end.
 
 ## Common issue
 

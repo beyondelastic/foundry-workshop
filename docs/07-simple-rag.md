@@ -26,6 +26,8 @@ Run:
 python examples/06-simple-rag/file_search_rag.py
 ```
 
+By default, this script now keeps the created agent and reuses the same workshop vector store on later reruns, so participants can inspect the setup and continue using the agent later in Foundry. To restore the older cleanup behavior for a one-off demo run, set `KEEP_AGENT=false` in your `.env` file.
+
 ## Example files
 
 - [Open file_search_rag.py on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/06-simple-rag/file_search_rag.py)
@@ -33,7 +35,7 @@ python examples/06-simple-rag/file_search_rag.py
 
 ## What this lab demonstrates
 
-1. Create a vector store.
+1. Create or reuse a vector store.
 2. Upload a local markdown file.
 3. Attach `FileSearchTool` to a prompt agent.
 4. Ask questions that require grounded retrieval from the uploaded content.
@@ -66,18 +68,22 @@ The agent should answer questions using the uploaded document rather than genera
 
 ## Verification
 
-- The vector store is created.
+- The vector store is created on the first run and reused on later runs.
 - The file upload completes successfully.
 - The agent answers questions about the local document.
-- Cleanup removes the agent version and vector store.
+- The agent and its vector store remain available by default for later use.
 
 ## Why the sample cleans up
 
-The sample deletes both the temporary agent version and the vector store at the end so the lab stays repeatable and the project does not fill up with workshop artifacts.
+Keeping the agent and vector store is now the default workshop behavior.
 
-That cleanup is useful for a guided exercise, but it is not the only reasonable choice. If you want to inspect the vector store, rerun additional questions against the same document set, or experiment with agent instructions, keeping the resources can be more practical.
+That makes it easier for participants to inspect the agent, review the vector store-backed setup, and keep using the grounded assistant after the script completes.
 
-So the tradeoff is similar to the tool-calls lab: cleanup is good for a clean demo, while keeping the resources is better when you want to iterate.
+The script is still safe to rerun multiple times. The first run creates the workshop vector store, and later runs reuse it instead of creating another index. Agent creation still uses versioning, so you can rerun the sample without losing earlier agent versions.
+
+If you change the contents of `product_info.md` and want the vector store rebuilt from that updated file, delete the existing workshop vector store in Foundry and run the script again.
+
+If you want a clean, disposable run instead, set `KEEP_AGENT=false` and the script will delete the created agent version and vector store at the end.
 
 ## Why this counts as RAG
 

@@ -19,6 +19,11 @@ def get_env(name: str, fallback: str | None = None) -> str:
     return value
 
 
+def get_keep_agent_setting() -> bool:
+    value = os.getenv("KEEP_AGENT", "true").strip().lower()
+    return value not in {"0", "false", "no", "off"}
+
+
 def main() -> None:
     load_dotenv()
 
@@ -26,6 +31,7 @@ def main() -> None:
     model_deployment_name = get_env(
         "AZURE_AI_MODEL_DEPLOYMENT_NAME", "MODEL_DEPLOYMENT_NAME"
     )
+    keep_agent = get_keep_agent_setting()
 
     with (
         DefaultAzureCredential() as credential,
@@ -81,8 +87,16 @@ def main() -> None:
             print()
             print(f"Web search tool used: {used_web_search}")
         finally:
-            project_client.agents.delete_version(agent_name=agent.name, agent_version=agent.version)
-            print("\nAgent deleted")
+            if keep_agent:
+                print(
+                    f"\nAgent kept: {agent.name} (version {agent.version}). Set KEEP_AGENT=false to restore cleanup behavior."
+                )
+            else:
+                project_client.agents.delete_version(
+                    agent_name=agent.name,
+                    agent_version=agent.version,
+                )
+                print("\nAgent deleted")
 
 
 if __name__ == "__main__":

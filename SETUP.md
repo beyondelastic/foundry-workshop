@@ -52,11 +52,17 @@ Required values:
 - `AZURE_AI_MODEL_DEPLOYMENT_NAME`
 - `AZURE_AI_AGENT_NAME`
 
+Recommended optional value:
+
+- `KEEP_AGENT=true`
+
 The workshop examples also accept these fallback names because Microsoft docs use them in some quickstarts:
 
 - `PROJECT_ENDPOINT`
 - `MODEL_DEPLOYMENT_NAME`
 - `AGENT_NAME`
+
+`KEEP_AGENT` controls whether the workshop examples that create agents and related vector stores keep them after the script finishes. The default workshop behavior is `true` so participants can inspect and reuse the created resources in Foundry. Set `KEEP_AGENT=false` when you want disposable demo runs instead.
 
 ## 6. Start the workshop UI
 

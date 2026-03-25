@@ -37,12 +37,15 @@ Primary names:
 - `AZURE_AI_PROJECT_ENDPOINT`
 - `AZURE_AI_MODEL_DEPLOYMENT_NAME`
 - `AZURE_AI_AGENT_NAME`
+- `KEEP_AGENT`
 
 Fallback names accepted by the example code:
 
 - `PROJECT_ENDPOINT`
 - `MODEL_DEPLOYMENT_NAME`
 - `AGENT_NAME`
+
+`KEEP_AGENT` controls whether workshop examples that create agents clean them up at the end. The default is `true`, which keeps created agents available in Foundry for later inspection and reuse. Set `KEEP_AGENT=false` if you want disposable demo runs instead.
 
 ## Success criteria
 

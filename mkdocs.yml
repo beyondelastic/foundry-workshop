@@ -1,5 +1,6 @@
 site_name: Microsoft Foundry Workshop
 site_description: Beginner-friendly Microsoft Foundry workshop with official-documentation-based exercises.
+site_url: https://beyondelastic.github.io/foundry-workshop/
 repo_name: foundry-workshop
 repo_url: https://github.com/beyondelastic/foundry-workshop
 edit_uri: edit/main/docs/

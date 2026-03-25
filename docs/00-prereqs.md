@@ -39,6 +39,10 @@ Primary names:
 - `AZURE_AI_AGENT_NAME`
 - `KEEP_AGENT`
 
+Optional later-lab name:
+
+- `AZURE_AI_WORKFLOW_NAME`
+
 Fallback names accepted by the example code:
 
 - `PROJECT_ENDPOINT`
@@ -46,6 +50,8 @@ Fallback names accepted by the example code:
 - `AGENT_NAME`
 
 `KEEP_AGENT` controls whether workshop examples that create agents clean them up at the end. The default is `true`, which keeps created agents available in Foundry for later inspection and reuse. Set `KEEP_AGENT=false` if you want disposable demo runs instead.
+
+`AZURE_AI_WORKFLOW_NAME` is only needed for the native workflow lab if you save the workflow under a different name than the workshop default.
 
 ## Success criteria
 

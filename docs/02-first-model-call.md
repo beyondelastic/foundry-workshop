@@ -47,7 +47,7 @@ This is a useful first lab because it proves the full path is working: local Pyt
 
 ## Expected result
 
-You should see a response to the prompt about France.
+You should see a short response describing common PCR use cases in life sciences.
 
 ## Verification
 

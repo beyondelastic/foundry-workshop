@@ -2,6 +2,8 @@
 
 Welcome to a docs-first Microsoft Foundry workshop for beginners.
 
+The examples use lightweight healthcare and life sciences scenarios so the workshop stays consistent across model calls, agent prompts, tool use, RAG, evaluation, and workflow labs.
+
 Workshop source repository: [beyondelastic/foundry-workshop](https://github.com/beyondelastic/foundry-workshop)
 
 This workshop is intentionally small, practical, and tied to official Microsoft documentation. Each section includes:

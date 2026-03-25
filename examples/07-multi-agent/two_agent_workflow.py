@@ -82,7 +82,9 @@ def main() -> None:
             definition=PromptAgentDefinition(
                 model=model_deployment_name,
                 instructions=(
-                    "You are a research assistant. Use web search to gather short, current guidance for outdoor trip planning. Return only three concise bullets."
+                    "You are a healthcare operations research assistant. Use web search "
+                    "to gather short, current public guidance for vaccine handling or "
+                    "mobile vaccination clinic operations. Return only three concise bullets."
                 ),
                 tools=[
                     WebSearchTool(
@@ -98,20 +100,22 @@ def main() -> None:
         )
 
         product_agent = project_client.agents.create_version(
-            agent_name="WorkshopProductAgent",
+            agent_name="WorkshopSupplyAgent",
             definition=PromptAgentDefinition(
                 model=model_deployment_name,
                 instructions=(
-                    "You are a product recommendation assistant. Use the uploaded product notes to recommend one product. Base the recommendation on the user scenario and the research notes you receive."
+                    "You are a clinical supply recommendation assistant. Use the "
+                    "uploaded supply notes to recommend one item. Base the "
+                    "recommendation on the user scenario and the research notes you receive."
                 ),
                 tools=[FileSearchTool(vector_store_ids=[vector_store.id])],
             ),
-            description="Product agent for workshop multi-agent handoff lab.",
+            description="Supply agent for workshop multi-agent handoff lab.",
         )
 
         try:
             scenario = (
-                "A participant is planning a rainy spring weekend hiking trip in the UK and wants one product recommendation from the catalog."
+                "A community health team is planning a one-day mobile vaccination clinic in the UK and wants one supply recommendation from the catalog."
             )
 
             research_notes = run_agent(
@@ -119,7 +123,7 @@ def main() -> None:
                 research_agent.name,
                 (
                     f"Scenario: {scenario}\n"
-                    "Find recent public guidance for what matters most on this type of trip. Return exactly three bullets."
+                    "Find recent public guidance for what matters most for this type of clinic. Return exactly three bullets."
                 ),
             )
 
@@ -132,11 +136,11 @@ def main() -> None:
                 (
                     f"Scenario: {scenario}\n\n"
                     f"Research notes:\n{research_notes}\n\n"
-                    "Using the uploaded product notes, recommend exactly one product. Explain why it fits in 3 to 4 bullets."
+                    "Using the uploaded clinical supply notes, recommend exactly one item. Explain why it fits in 3 to 4 bullets."
                 ),
             )
 
-            print("\nProduct agent output:\n")
+            print("\nSupply agent output:\n")
             print(final_recommendation)
         finally:
             if keep_agent:

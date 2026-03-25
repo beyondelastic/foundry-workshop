@@ -61,7 +61,10 @@ def main() -> None:
             extra_body={
                 "agent_reference": {"name": agent_name, "type": "agent_reference"}
             },
-            input="In one short sentence, explain why observability matters for AI applications.",
+            input=(
+                "In one short sentence, explain why observability matters for an AI "
+                "assistant that summarizes clinical-trial documents."
+            ),
         )
 
         second_response = openai_client.responses.create(
@@ -69,7 +72,10 @@ def main() -> None:
             extra_body={
                 "agent_reference": {"name": agent_name, "type": "agent_reference"}
             },
-            input="Now give one practical reason why traces help when debugging that agent.",
+            input=(
+                "Now give one practical reason why traces help when debugging that "
+                "clinical-trial assistant."
+            ),
         )
 
         app_trace_id = format(span.get_span_context().trace_id, "032x")

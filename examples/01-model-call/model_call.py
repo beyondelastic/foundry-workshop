@@ -31,7 +31,9 @@ def main() -> None:
 
     response = openai.responses.create(
         model=model_deployment_name,
-        input="What is the size of France in square miles?",
+        input=(
+            "List three common use cases for PCR in life sciences in one sentence each."
+        ),
     )
 
     print("Model response:")

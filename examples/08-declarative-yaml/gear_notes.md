@@ -1,25 +1,25 @@
-# Contoso City Break Gear Notes
+# Contoso Mobile Clinic Supply Notes
 
-## MetroShell Jacket
+## ColdChain Transit Case
 
-- Price: $119
-- Best use: rainy city travel and light walking
-- Notable feature: waterproof shell that packs into its own pocket
+- Price: $329
+- Best use: transporting refrigerated vaccine doses between care sites
+- Notable feature: validated temperature hold between 2 C and 8 C for up to 12 hours
 
-## StreetStride Daypack
+## Portable Screening Station
 
-- Price: $89
-- Best use: short city breaks and daily sightseeing
-- Notable feature: 24-liter capacity with laptop sleeve and hidden passport pocket
+- Price: $189
+- Best use: pop-up intake desks for community health events
+- Notable feature: fold-out workspace with integrated privacy side panels
 
-## CloudWalk Shoes
+## Mobile Consent Tablet
 
-- Price: $149
-- Best use: long walking days in mixed weather
-- Notable feature: water-resistant upper with cushioned sole for pavement comfort
+- Price: $449
+- Best use: digital patient intake and research consent capture
+- Notable feature: 10-hour battery life with encrypted form storage
 
-## SipSafe Bottle
+## Sharps Safety Station
 
-- Price: $35
-- Best use: commuting and day trips
-- Notable feature: insulated steel body with leak-proof cap
+- Price: $58
+- Best use: temporary vaccination and phlebotomy stations
+- Notable feature: portable container with lockable lid and integrated tray

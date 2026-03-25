@@ -37,9 +37,9 @@ So this is a valid multi-agent option, but it is intentionally the lightweight o
 
 ## Scenario
 
-One agent researches recent public guidance for a rainy spring hiking trip.
+One agent researches recent public guidance for a mobile vaccination clinic.
 
-Another agent uses the local product notes from the RAG lab to recommend one product that fits those conditions.
+Another agent uses the local clinical supply notes from the RAG lab to recommend one item that fits those conditions.
 
 ## Exercise
 
@@ -62,17 +62,17 @@ By default, this script keeps both agents and reuses the same supporting vector 
 2. Create a product agent with `FileSearchTool`.
 3. Run the first agent and capture its output.
 4. Pass that output into the second agent as structured context.
-5. Produce a final recommendation grounded in the product file.
+5. Produce a final recommendation grounded in the clinical supply file.
 
 ## How the handoff works
 
 The script creates two separate prompt agents.
 
-The first agent is the research agent. It has `WebSearchTool`, so it can gather recent public guidance for the trip scenario. The helper function `run_agent(...)` invokes that agent by creating a conversation and sending a prompt through `responses.create(...)` with `agent_reference`.
+The first agent is the research agent. It has `WebSearchTool`, so it can gather recent public guidance for the clinic scenario. The helper function `run_agent(...)` invokes that agent by creating a conversation and sending a prompt through `responses.create(...)` with `agent_reference`.
 
 The returned text from that first run is stored in `research_notes`. That text is the handoff payload.
 
-The script then invokes the second agent, the product agent. This time the Python code includes the earlier `research_notes` directly in the second prompt under a `Research notes:` section. The second agent also has access to `FileSearchTool`, so it can combine the handed-off notes with retrieved catalog content from the uploaded product file.
+The script then invokes the second agent, the supply agent. This time the Python code includes the earlier `research_notes` directly in the second prompt under a `Research notes:` section. The second agent also has access to `FileSearchTool`, so it can combine the handed-off notes with retrieved catalog content from the uploaded clinical supply file.
 
 In other words, the handoff is not agent A directly calling agent B. The handoff is:
 
@@ -86,7 +86,7 @@ That is why this lab is a good introduction to multi-agent composition. It shows
 
 The first agent returns short research notes.
 
-The second agent uses those notes plus the uploaded product file to recommend one product and explain why it fits the scenario.
+The second agent uses those notes plus the uploaded clinical supply file to recommend one item and explain why it fits the scenario.
 
 ## Verification
 
@@ -97,7 +97,7 @@ The second agent uses those notes plus the uploaded product file to recommend on
 
 ## Additional resource note
 
-This lab keeps two agents instead of one, plus the supporting product vector store used by the second agent.
+This lab keeps two agents instead of one, plus the supporting clinical supply vector store used by the second agent.
 
 That vector store is reused on later runs, so reruns do not keep creating new indexes.
 

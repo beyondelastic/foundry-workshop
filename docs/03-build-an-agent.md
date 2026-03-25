@@ -57,7 +57,7 @@ Taken together, these two scripts show the basic agent lifecycle used throughout
 ## Expected result
 
 - The agent creation script prints an agent id, name, and version.
-- The chat script answers the first question and the follow-up.
+- The chat script answers the first life-science question and the follow-up.
 
 ## Verification
 

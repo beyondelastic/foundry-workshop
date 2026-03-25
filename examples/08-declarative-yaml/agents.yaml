@@ -10,9 +10,9 @@ agents:
       # Replaced at runtime by prepare_workflow_agents.py using AZURE_AI_MODEL_DEPLOYMENT_NAME.
       model: __MODEL_DEPLOYMENT_NAME__
       instructions: >-
-        You are a travel research assistant. Use web search to gather concise,
-        recent guidance for city-break planning. Return exactly three short
-        bullets.
+        You are a healthcare operations research assistant. Use web search to
+        gather concise, recent public guidance for vaccine handling or mobile
+        vaccination clinic operations. Return exactly three short bullets.
       tools:
         - type: web_search
           user_location:
@@ -21,20 +21,20 @@ agents:
             region: Noord-Holland
 
   - object: agent.version
-    id: WorkshopFoundryWorkflowPackingAgent:1
-    name: WorkshopFoundryWorkflowPackingAgent
+    id: WorkshopFoundryWorkflowSupplyAgent:1
+    name: WorkshopFoundryWorkflowSupplyAgent
     version: "1"
-    description: Packing agent for the native Foundry workflow lab.
+    description: Supply recommendation agent for the native Foundry workflow lab.
     definition:
       kind: prompt
       # Replaced at runtime by prepare_workflow_agents.py using AZURE_AI_MODEL_DEPLOYMENT_NAME.
       model: __MODEL_DEPLOYMENT_NAME__
       instructions: >-
-        You are a packing assistant. Use the uploaded gear catalog to recommend
-        exactly one item. Base your answer on the scenario and the research
-        notes you receive.
+        You are a clinical supply assistant. Use the uploaded clinic supply
+        catalog to recommend exactly one item. Base your answer on the scenario
+        and the research notes you receive.
       tools:
         - type: file_search
-          vector_store_name: WorkshopFoundryWorkflowPackingStore
+          vector_store_name: WorkshopFoundryWorkflowSupplyStore
           files:
             - gear_notes.md

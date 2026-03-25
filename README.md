@@ -2,6 +2,8 @@
 
 This repository is a beginner-friendly Microsoft Foundry workshop built around official Microsoft Learn guidance and official samples.
 
+The examples use lightweight healthcare and life sciences scenarios so the workshop stays consistent across model calls, agents, evaluation, RAG, and workflow labs.
+
 GitHub repository: [beyondelastic/foundry-workshop](https://github.com/beyondelastic/foundry-workshop)
 
 ## What this workshop covers
@@ -53,6 +55,8 @@ GitHub repository: [beyondelastic/foundry-workshop](https://github.com/beyondela
 5. Start the docs UI with `mkdocs serve`.
 
 Detailed steps are in `SETUP.md`.
+
+If you run the native workflow lab, save the workflow in Foundry with the default name `Workshop-Clinical-Operations-Workflow` or set `AZURE_AI_WORKFLOW_NAME` in `.env` to match the name you chose.
 
 ## Run the workshop UI
 

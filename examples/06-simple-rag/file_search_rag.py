@@ -48,7 +48,7 @@ def main() -> None:
     )
     asset_file_path = Path(__file__).with_name("product_info.md")
     keep_agent = get_keep_agent_setting()
-    vector_store_name = "WorkshopProductInfoStore"
+    vector_store_name = "WorkshopClinicalSupplyStore"
 
     with (
         DefaultAzureCredential() as credential,
@@ -66,7 +66,9 @@ def main() -> None:
             definition=PromptAgentDefinition(
                 model=model_deployment_name,
                 instructions=(
-                    "You are a helpful assistant that answers from the uploaded product notes whenever the question can be answered from that document."
+                    "You are a healthcare operations assistant that answers from the "
+                    "uploaded clinical supply notes whenever the question can be "
+                    "answered from that document."
                 ),
                 tools=[FileSearchTool(vector_store_ids=[vector_store.id])],
             ),
@@ -79,7 +81,7 @@ def main() -> None:
             response = openai_client.responses.create(
                 conversation=conversation.id,
                 input=(
-                    "Which product is best for cold-weather camping, and what is its temperature rating?"
+                    "Which item is best for transporting refrigerated vaccine doses, and what temperature range does it support?"
                 ),
                 extra_body={"agent_reference": {"name": agent.name, "type": "agent_reference"}},
             )

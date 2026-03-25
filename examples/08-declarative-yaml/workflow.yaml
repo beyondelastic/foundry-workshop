@@ -1,15 +1,15 @@
 kind: workflow
 id: ""
-name: Workshop-City-Break-Workflow
-description: Recommends one catalog item for a rainy spring city break using a native Foundry workflow.
+name: Workshop-Clinical-Operations-Workflow
+description: Recommends one clinical supply item for a mobile vaccination scenario using a native Foundry workflow.
 trigger:
   kind: OnConversationStart
-  id: trigger_city_break
+  id: trigger_clinical_operations
   actions:
     - kind: SetVariable
-      id: set_trip_scenario
-      variable: Local.TripScenario
-      value: A participant is planning a three-day rainy spring city break in Amsterdam and wants one gear recommendation from the catalog.
+      id: set_clinic_scenario
+      variable: Local.ClinicScenario
+      value: A community health team is planning a one-day mobile vaccination clinic in Amsterdam and wants one supply recommendation from the catalog.
 
     - kind: InvokeAzureAgent
       id: run_research_agent
@@ -18,26 +18,26 @@ trigger:
       conversationId: =System.ConversationId
       input:
         messages: >-
-          Scenario: {Local.TripScenario}
+          Scenario: {Local.ClinicScenario}
 
-          Find recent public guidance for what matters most on this type of trip. Return exactly three bullets.
+          Find recent public guidance for what matters most for this type of clinic. Return exactly three bullets.
       output:
         autoSend: false
         messages: Local.ResearchOutputText
 
     - kind: InvokeAzureAgent
-      id: run_packing_agent
+      id: run_supply_agent
       agent:
-        name: WorkshopFoundryWorkflowPackingAgent
+        name: WorkshopFoundryWorkflowSupplyAgent
       conversationId: =System.ConversationId
       input:
         messages: >-
-          Scenario: {Local.TripScenario}
+          Scenario: {Local.ClinicScenario}
 
           Research notes:
           {Local.ResearchOutputText}
 
-          Using only the uploaded gear catalog, recommend exactly one item. Explain the choice in three bullets and include the price.
+          Using only the uploaded clinic supply catalog, recommend exactly one item. Explain the choice in three bullets and include the price.
       output:
         autoSend: false
         messages: Local.RecommendationOutputText
@@ -47,4 +47,4 @@ trigger:
       activity: '{Local.RecommendationOutputText}'
 
     - kind: EndConversation
-      id: end_city_break_workflow
+      id: end_clinical_operations_workflow

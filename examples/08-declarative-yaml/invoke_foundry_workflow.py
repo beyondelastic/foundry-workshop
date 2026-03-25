@@ -155,7 +155,7 @@ def invoke_workflow_verbose(openai_client, conversation_id: str, workflow_name: 
                 "type": "agent_reference",
             }
         },
-        input="Start the city break planning workflow.",
+        input="Start the mobile vaccination clinic planning workflow.",
         stream=True,
         metadata={"x-ms-debug-mode-enabled": "1"},
     )
@@ -201,7 +201,7 @@ def invoke_workflow_quiet(openai_client, conversation_id: str, workflow_name: st
                 "type": "agent_reference",
             }
         },
-        input="Start the city break planning workflow.",
+        input="Start the mobile vaccination clinic planning workflow.",
     )
 
     messages = extract_conversation_messages(response, workflow_name)
@@ -225,7 +225,9 @@ def main() -> None:
     load_dotenv()
 
     project_endpoint = get_env("AZURE_AI_PROJECT_ENDPOINT", "PROJECT_ENDPOINT")
-    workflow_name = os.getenv("AZURE_AI_WORKFLOW_NAME", "Workshop-City-Break-Workflow")
+    workflow_name = os.getenv(
+        "AZURE_AI_WORKFLOW_NAME", "Workshop-Clinical-Operations-Workflow"
+    )
     verbose = is_verbose_enabled()
 
     with AIProjectClient(

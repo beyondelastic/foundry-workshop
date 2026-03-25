@@ -48,7 +48,7 @@ Next, the script uploads `product_info.md` into that vector store by calling `up
 
 After the file is indexed, the script creates a prompt agent and gives it a `FileSearchTool` that points at the vector store ID. This is the key RAG step. The model is still the same deployed model you used in earlier labs, but now the agent has access to a retrieval tool that can search the uploaded document for relevant content before answering.
 
-When the script sends the camping question through `responses.create(...)` with `agent_reference`, Foundry routes the request to that file-search agent instead of directly to the base model. The agent reads the question, decides the answer should come from the uploaded notes, retrieves the relevant chunk or chunks from the vector store, and then uses that retrieved context to generate the final answer.
+When the script sends the vaccine cold-chain question through `responses.create(...)` with `agent_reference`, Foundry routes the request to that file-search agent instead of directly to the base model. The agent reads the question, decides the answer should come from the uploaded notes, retrieves the relevant chunk or chunks from the vector store, and then uses that retrieved context to generate the final answer.
 
 That is why this counts as retrieval-augmented generation rather than just prompt engineering. The answer is not only based on the model's general training data. It is augmented with retrieved content from `product_info.md`, which makes the answer grounded in the uploaded document.
 

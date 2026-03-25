@@ -51,7 +51,9 @@ def main() -> None:
             definition=PromptAgentDefinition(
                 model=model_deployment_name,
                 instructions=(
-                    "You are a helpful assistant. Use web search when the user asks for recent or time-sensitive public information."
+                    "You are a healthcare and life sciences research assistant. Use web "
+                    "search when the user asks for recent or time-sensitive public "
+                    "information."
                 ),
                 tools=[tool],
             ),
@@ -65,7 +67,7 @@ def main() -> None:
                 response = openai_client.responses.create(
                     conversation=conversation.id,
                     input=(
-                        "Find one recent Microsoft Learn page about Foundry evaluation. Give the title and one-sentence purpose."
+                        "Find one recent FDA page about clinical trial diversity or trial enrollment guidance. Give the title and one-sentence purpose."
                     ),
                     extra_body={"agent_reference": {"name": agent.name, "type": "agent_reference"}},
                 )

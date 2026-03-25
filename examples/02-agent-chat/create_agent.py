@@ -34,7 +34,11 @@ def main() -> None:
         agent_name=agent_name,
         definition=PromptAgentDefinition(
             model=model_deployment_name,
-            instructions="You are a helpful assistant that answers general questions clearly and briefly.",
+            instructions=(
+                "You are a life sciences workshop assistant. Answer healthcare and "
+                "biomedical questions clearly and briefly, stay educational, and do "
+                "not provide diagnosis or treatment advice."
+            ),
         ),
     )
 

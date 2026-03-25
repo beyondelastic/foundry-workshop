@@ -32,7 +32,7 @@ def main() -> None:
     first_response = openai.responses.create(
         conversation=conversation.id,
         extra_body={"agent_reference": {"name": agent_name, "type": "agent_reference"}},
-        input="What is the size of France in square miles?",
+        input="What does ELISA stand for in a life sciences lab context?",
     )
     print("First response:")
     print(first_response.output_text)
@@ -40,7 +40,7 @@ def main() -> None:
     second_response = openai.responses.create(
         conversation=conversation.id,
         extra_body={"agent_reference": {"name": agent_name, "type": "agent_reference"}},
-        input="And what is the capital city?",
+        input="And what is it commonly used to detect or measure?",
     )
     print("\nSecond response:")
     print(second_response.output_text)

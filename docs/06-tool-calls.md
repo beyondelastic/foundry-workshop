@@ -55,7 +55,7 @@ This is the main point of the lab: the agent still returns plain text to you, bu
 
 ## Expected result
 
-The response should return a recent public result from web search instead of relying only on the model's internal knowledge.
+The response should return a recent public healthcare or life-sciences result from web search instead of relying only on the model's internal knowledge.
 
 ## Verification
 

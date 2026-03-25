@@ -2,7 +2,7 @@
 
 ## Goal
 
-Run a simple evaluation against your agent using a tiny JSONL dataset and built-in evaluators.
+Run a simple evaluation against your agent using a tiny JSONL dataset of healthcare and life-science prompts plus built-in evaluators.
 
 ## Estimated time
 
@@ -51,6 +51,8 @@ The key line `evaluation = openai_client.evals.create(...)` is important because
 ## Dataset format
 
 The workshop uses a minimal dataset where each line contains a `query` field.
+
+In this version of the workshop, those queries are simple healthcare and life-science questions so the evaluation stays aligned with the rest of the examples.
 
 ## Why these evaluators are a good starting point
 

@@ -1,29 +1,29 @@
-# Contoso Outdoor Product Notes
+# Contoso Clinical Supply Notes
 
-## TrailFlex Backpack
+## ColdChain Transit Case
 
-- Price: $129
-- Capacity: 32 liters
-- Best use: day hikes and urban commuting
-- Notable feature: rear laptop sleeve with water-resistant zipper
+- Price: $329
+- Temperature range: 2 C to 8 C for up to 12 hours
+- Best use: transporting refrigerated vaccine doses between care sites
+- Notable feature: validated cold-chain hold with tamper-evident latch
 
-## SummitPro Tent
+## Specimen Transport Kit
 
-- Price: $349
-- Sleeps: 3 people
-- Best use: multi-day hiking trips
-- Notable feature: aluminum pole frame designed for windy campsites
+- Price: $94
+- Capacity: 12 sample containers
+- Best use: routine blood and swab specimen pickup from outpatient clinics
+- Notable feature: absorbent lining, UN3373 labeling area, and tamper-evident seal
 
-## CozyNights Sleeping Bag
+## Mobile Consent Tablet
 
-- Price: $189
-- Temperature rating: 20F
-- Best use: spring and fall camping
-- Notable feature: insulated draft collar for cold-weather comfort
+- Price: $449
+- Battery life: 10 hours
+- Best use: digital patient intake and research consent capture
+- Notable feature: encrypted form storage with stylus support
 
-## RiverRun Bottle
+## Sharps Safety Station
 
-- Price: $39
-- Capacity: 1 liter
-- Best use: running and cycling
-- Notable feature: quick-release cap for one-handed use
+- Price: $58
+- Capacity: 5 liters
+- Best use: temporary vaccination and phlebotomy stations
+- Notable feature: portable container with lockable lid and integrated tray

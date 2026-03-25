@@ -2,7 +2,7 @@
 
 ## Goal
 
-Use a native Foundry workflow for a two-step city-break scenario, then invoke that workflow from Python.
+Use a native Foundry workflow for a two-step mobile vaccination clinic scenario, then invoke that workflow from Python.
 
 ## Estimated time
 
@@ -29,9 +29,9 @@ This is the platform-managed workflow approach rather than the Python-managed or
 
 ## Scenario
 
-One workflow step asks a research agent for current city-break guidance.
+One workflow step asks a research agent for current mobile vaccination clinic guidance.
 
-A second workflow step asks a packing agent to recommend exactly one catalog item based on that research.
+A second workflow step asks a supply agent to recommend exactly one catalog item based on that research.
 
 Foundry owns the workflow definition and executes the workflow actions.
 
@@ -83,9 +83,9 @@ It uses workflow actions like `SetVariable`, `InvokeAzureAgent`, `SendActivity`,
 
 In this sample:
 
-1. the workflow stores the trip scenario in a workflow variable
+1. the workflow stores the clinic scenario in a workflow variable
 2. it invokes the research agent
-3. it invokes the packing agent with the research output
+3. it invokes the supply agent with the research output
 4. it sends the final answer back to the conversation
 
 `prepare_workflow_agents.py` creates the agents that the workflow references.
@@ -93,7 +93,7 @@ In this sample:
 The workflow YAML refers to agent names, so those agents must already exist in Foundry. This script creates or updates:
 
 1. `WorkshopFoundryWorkflowResearchAgent`
-2. `WorkshopFoundryWorkflowPackingAgent`
+2. `WorkshopFoundryWorkflowSupplyAgent`
 
 The script now reads those definitions from `agents.yaml`, resolves any file-search vector stores, and then creates the corresponding Foundry prompt agent versions.
 
@@ -105,7 +105,7 @@ If you set `WORKFLOW_VERBOSE=true`, it switches to a streamed troubleshooting vi
 
 `gear_notes.md` is the local grounding file.
 
-This is the catalog used by the packing agent. It is not the workflow. It is the data source that the packing agent retrieves from when making its recommendation.
+This is the catalog used by the supply agent. It is not the workflow. It is the data source that the supply agent retrieves from when making its recommendation.
 
 ## What happens when you run it
 
@@ -113,17 +113,17 @@ The easiest way to understand this lab is to split it into three phases.
 
 The execution flow is:
 
-1. `prepare_workflow_agents.py` creates or updates the research and packing agents.
+1. `prepare_workflow_agents.py` creates or updates the research and supply agents.
 2. You save `workflow.yaml` in the Foundry workflow editor so Foundry has a real workflow resource.
 3. `invoke_foundry_workflow.py` starts a conversation and invokes that workflow.
 
 Once the workflow is running, Foundry performs the orchestration itself:
 
 1. the workflow trigger starts on conversation start
-2. a workflow variable is initialized with the trip scenario
+2. a workflow variable is initialized with the clinic scenario
 3. Foundry invokes the research agent
 4. the research output is stored in a workflow variable
-5. Foundry invokes the packing agent with that research output included in the next prompt
+5. Foundry invokes the supply agent with that research output included in the next prompt
 6. the final recommendation is sent back to the conversation
 
 Foundry owns the step order and action execution.
@@ -151,7 +151,7 @@ That separation makes it easier to see which logic belongs to Foundry and which 
 
 ## Expected result
 
-The default script output shows a short transcript with the research agent message first and the packing agent message second.
+The default script output shows a short transcript with the research agent message first and the supply agent message second.
 
 If you run with `WORKFLOW_VERBOSE=true`, you will also see workflow actions and lower-level response events.
 
@@ -165,7 +165,7 @@ If you run with `WORKFLOW_VERBOSE=true`, you will also see workflow actions and 
 
 ## Additional resource note
 
-This lab keeps the two supporting agents and the packing agent's vector store so the workflow can be invoked again without recreating its dependencies every time.
+This lab keeps the two supporting agents and the supply agent's vector store so the workflow can be invoked again without recreating its dependencies every time.
 
 That vector store is reused on later runs, so reruns do not keep creating new indexes.
 
@@ -175,7 +175,7 @@ If you change `gear_notes.md` and want the index rebuilt, delete the existing wo
 
 After you save `workflow.yaml`, you should see a real workflow in the Foundry `Workflows` tab.
 
-You should also see the supporting agents created by `prepare_workflow_agents.py`, plus the vector store used by the packing agent.
+You should also see the supporting agents created by `prepare_workflow_agents.py`, plus the vector store used by the supply agent.
 
 ## Why this matters
 

@@ -32,7 +32,7 @@ def main() -> None:
     openai_client = project_client.get_openai_client()
 
     dataset = project_client.datasets.upload_file(
-        name="agent-test-queries",
+        name="agent-healthcare-test-queries",
         version="1",
         file_path=str(dataset_path),
     )
@@ -83,7 +83,7 @@ def main() -> None:
     }
 
     evaluation = openai_client.evals.create(
-        name="Agent Quality Evaluation",
+        name="Healthcare Agent Quality Evaluation",
         data_source_config=data_source_config,
         testing_criteria=testing_criteria,
     )
@@ -91,7 +91,7 @@ def main() -> None:
 
     eval_run = openai_client.evals.runs.create(
         eval_id=evaluation.id,
-        name="Agent Evaluation Run",
+        name="Healthcare Agent Evaluation Run",
         data_source={
             "type": "azure_ai_target_completions",
             "source": {

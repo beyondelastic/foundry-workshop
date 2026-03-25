@@ -56,6 +56,10 @@ Recommended optional value:
 
 - `KEEP_AGENT=true`
 
+Optional value for the native workflow lab:
+
+- `AZURE_AI_WORKFLOW_NAME=Workshop-Clinical-Operations-Workflow`
+
 The workshop examples also accept these fallback names:
 
 - `PROJECT_ENDPOINT`
@@ -63,6 +67,8 @@ The workshop examples also accept these fallback names:
 - `AGENT_NAME`
 
 `KEEP_AGENT` controls whether the workshop examples that create agents and related vector stores keep them after the script finishes. The default is `true`, so you can inspect and reuse the created resources in Foundry. Set `KEEP_AGENT=false` when you want a disposable run instead.
+
+`AZURE_AI_WORKFLOW_NAME` is only needed if you save the native Foundry workflow under a different name than the workshop default.
 
 ## 6. Start the workshop UI
 
@@ -91,6 +97,8 @@ mkdocs serve
 The tool-call lab uses the built-in `WebSearchTool` so participants can see real tool usage without first configuring a separate MCP server.
 
 The simple RAG lab uses `FileSearchTool` with one local markdown file uploaded into a vector store. This keeps the retrieval pattern self-contained and easy to run in a workshop.
+
+The workshop scenarios are healthcare and life-sciences themed, but the focus is still on Foundry patterns rather than domain-specific clinical guidance.
 
 ## Troubleshooting
 

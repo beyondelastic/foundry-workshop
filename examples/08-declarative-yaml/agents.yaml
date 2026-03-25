@@ -7,6 +7,7 @@ agents:
     description: Research agent for the native Foundry workflow lab.
     definition:
       kind: prompt
+      # Replaced at runtime by prepare_workflow_agents.py using AZURE_AI_MODEL_DEPLOYMENT_NAME.
       model: __MODEL_DEPLOYMENT_NAME__
       instructions: >-
         You are a travel research assistant. Use web search to gather concise,
@@ -26,6 +27,7 @@ agents:
     description: Packing agent for the native Foundry workflow lab.
     definition:
       kind: prompt
+      # Replaced at runtime by prepare_workflow_agents.py using AZURE_AI_MODEL_DEPLOYMENT_NAME.
       model: __MODEL_DEPLOYMENT_NAME__
       instructions: >-
         You are a packing assistant. Use the uploaded gear catalog to recommend

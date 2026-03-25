@@ -30,7 +30,7 @@ Run:
 python examples/05-tool-web-search/web_search_agent.py
 ```
 
-By default, this script now keeps the created agent so participants can inspect and reuse it later in Foundry. To restore the older cleanup behavior for a one-off demo run, set `KEEP_AGENT=false` in your `.env` file.
+By default, this script keeps the created agent so you can inspect and reuse it later in Foundry. Set `KEEP_AGENT=false` in your `.env` file if you want a disposable run.
 
 ## Example file
 
@@ -51,7 +51,7 @@ When the script sends the question through `responses.create(...)` with `agent_r
 
 The response payload includes both the final assistant message and structured items that describe what happened during execution. In this sample, the script checks `response.output` for any item with `type == "web_search_call"`. That is why the terminal can print `Web search tool used: True` even though the final text looks like a normal answer.
 
-This is the main concept the page is trying to show: the agent still returns plain text to the user, but under the hood it can take an extra step, call a tool, and then use the tool result to produce a grounded answer.
+This is the main point of the lab: the agent still returns plain text to you, but under the hood it can call a tool and use that result to produce a grounded answer.
 
 ## Expected result
 
@@ -66,9 +66,9 @@ The response should return a recent public result from web search instead of rel
 
 ## Why the sample keeps the agent
 
-Keeping the agent is now the default workshop behavior.
+Keeping the agent is the default workshop behavior.
 
-That makes it easier for participants to inspect the agent in the Foundry UI and continue experimenting after the script finishes.
+That makes it easier to inspect the agent in the Foundry UI and continue experimenting after the script finishes.
 
 The script is still safe to rerun multiple times. Each rerun creates a new version under the same agent name, so participants can keep iterating without manually deleting the earlier one first.
 

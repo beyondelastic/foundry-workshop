@@ -49,7 +49,7 @@ Run:
 python examples/07-multi-agent/two_agent_workflow.py
 ```
 
-By default, this script now keeps both agents and reuses the same supporting vector store on later reruns so participants can inspect them and continue experimenting in Foundry after the Python run finishes. To restore the older cleanup behavior for a one-off demo run, set `KEEP_AGENT=false` in your `.env` file.
+By default, this script keeps both agents and reuses the same supporting vector store on later reruns so you can inspect them and continue experimenting in Foundry after the Python run finishes. Set `KEEP_AGENT=false` in your `.env` file if you want a disposable run.
 
 ## Example files
 
@@ -114,8 +114,8 @@ Use Agent Framework workflows when:
 
 In this workshop, the handoff pattern is the right first step. It teaches multi-agent composition without forcing you to learn a new orchestration framework immediately.
 
-## Why you do not see a Foundry workflow
+## How this differs from the next lab
 
-That is expected in this workshop.
+This lab uses Python to coordinate the handoff between two agents. You can read the orchestration directly in the script, which makes the flow easy to follow.
 
-The multi-agent and YAML labs use Python to orchestrate prompt agents, but they do not create native Foundry workflow resources. The YAML lab is declarative in your source files, not in the Foundry portal's workflow system, so you will see agents, files, and indexes in the UI but no workflow entry.
+In the next lab, Foundry owns the orchestration through a native workflow resource. That gives you a useful contrast between application-managed orchestration and platform-managed orchestration.

@@ -77,6 +77,6 @@ python examples/08-declarative-yaml/prepare_workflow_agents.py
 python examples/08-declarative-yaml/invoke_foundry_workflow.py
 ```
 
-## Notes on versions
+## SDK note
 
-This workshop assumes the current Microsoft Foundry projects API shape used in `azure-ai-projects>=2.0.0`. If Microsoft updates the SDK or quickstarts, update the examples to match the current official docs.
+This workshop targets `azure-ai-projects>=2.0.0`. If you run into SDK-shape mismatches, first confirm your installed version with `pip show azure-ai-projects`.

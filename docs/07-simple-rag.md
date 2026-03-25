@@ -26,7 +26,7 @@ Run:
 python examples/06-simple-rag/file_search_rag.py
 ```
 
-By default, this script now keeps the created agent and reuses the same workshop vector store on later reruns, so participants can inspect the setup and continue using the agent later in Foundry. To restore the older cleanup behavior for a one-off demo run, set `KEEP_AGENT=false` in your `.env` file.
+By default, this script keeps the created agent and reuses the same workshop vector store on later reruns, so you can inspect the setup and continue using the agent later in Foundry. Set `KEEP_AGENT=false` in your `.env` file if you want a disposable run.
 
 ## Example files
 

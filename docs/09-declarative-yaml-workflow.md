@@ -15,15 +15,11 @@ Use a native Foundry workflow for a two-step city-break scenario, then invoke th
 - [Azure SDK for Python agent samples](https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/ai/azure-ai-projects/samples/agents)
 - [microsoft-foundry/foundry-samples](https://github.com/microsoft-foundry/foundry-samples)
 
-## What this lab is and is not
+## How this lab works
 
 This lab uses a native Foundry workflow YAML.
 
-It does **not** use a custom Python workflow runner.
-
-It also does **not** treat workflow YAML as a local configuration file that only this repository understands.
-
-Instead, the pattern is:
+The pattern is:
 
 1. Python prepares the agents that the workflow will invoke.
 2. Foundry stores and manages the workflow resource.
@@ -130,7 +126,7 @@ Once the workflow is running, Foundry performs the orchestration itself:
 5. Foundry invokes the packing agent with that research output included in the next prompt
 6. the final recommendation is sent back to the conversation
 
-That is the important difference from the old lab: Foundry now owns the step order and action execution.
+Foundry owns the step order and action execution.
 
 ## Why this is useful
 
@@ -155,7 +151,9 @@ That separation makes it easier to see which logic belongs to Foundry and which 
 
 ## Expected result
 
-The streamed output shows workflow actions running, followed by a final gear recommendation grounded in the local catalog.
+The default script output shows a short transcript with the research agent message first and the packing agent message second.
+
+If you run with `WORKFLOW_VERBOSE=true`, you will also see workflow actions and lower-level response events.
 
 ## Verification
 
@@ -173,11 +171,11 @@ That vector store is reused on later runs, so reruns do not keep creating new in
 
 If you change `gear_notes.md` and want the index rebuilt, delete the existing workflow vector store in Foundry and run `prepare_workflow_agents.py` again.
 
-## Why you now see a Foundry workflow
+## What you should see in Foundry
 
-With this replacement lab, you should now see a real workflow in the Foundry `Workflows` tab after you save `workflow.yaml` there.
+After you save `workflow.yaml`, you should see a real workflow in the Foundry `Workflows` tab.
 
-That is the main architectural difference from the earlier version of lab 09. The old lab only used a local Python runner. This version uses a native workflow definition that Foundry itself can store and execute.
+You should also see the supporting agents created by `prepare_workflow_agents.py`, plus the vector store used by the packing agent.
 
 ## Why this matters
 

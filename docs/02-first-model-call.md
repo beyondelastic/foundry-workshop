@@ -28,7 +28,7 @@ This example is using the Responses API. The script first connects to your Found
 
 - [Open model_call.py on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/01-model-call/model_call.py)
 
-## What this script demonstrates
+## What this lab demonstrates
 
 1. Create an `AIProjectClient` with `DefaultAzureCredential`.
 2. Get the OpenAI-compatible client from the project.

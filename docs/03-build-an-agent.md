@@ -14,29 +14,30 @@ Create a prompt agent version and use it in a multi-turn conversation.
 - [Microsoft Foundry SDKs and Endpoints](https://learn.microsoft.com/azure/foundry/how-to/develop/sdk-overview?tabs=sync&pivots=programming-language-python)
 - [Azure SDK for Python agent samples](https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/ai/azure-ai-projects/samples/agents)
 
-## Exercise flow
+## Exercise
 
-### Step 1: create the agent
+1. Create the agent:
 
 ```bash
 python examples/02-agent-chat/create_agent.py
 ```
 
-[Open create_agent.py on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/02-agent-chat/create_agent.py)
-
 This step does not chat with the model yet. It creates a prompt-based agent version inside your Foundry project by combining three things: the project endpoint, the deployed model name, and the agent instructions. In this script, `PromptAgentDefinition(...)` tells Foundry which deployed model the agent should use and what system-style behavior it should follow.
 
 The script reads the agent name from `AZURE_AI_AGENT_NAME` in your `.env` file. If you want the agent to appear under a different name in Foundry, change that value in `.env` before running the script.
 
-### Step 2: chat with the agent
+2. Chat with the agent:
 
 ```bash
 python examples/02-agent-chat/chat_with_agent.py
 ```
 
-[Open chat_with_agent.py on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/02-agent-chat/chat_with_agent.py)
-
 This step uses the agent you created in step 1. Instead of calling the model directly, the script creates a conversation and sends messages through the agent reference, so the reply is generated with the agent's instructions applied. Because the script keeps the same conversation object across turns, the second question can use the context from the first question.
+
+## Example files
+
+- [Open create_agent.py on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/02-agent-chat/create_agent.py)
+- [Open chat_with_agent.py on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/02-agent-chat/chat_with_agent.py)
 
 ## What this lab demonstrates
 
@@ -44,6 +45,14 @@ This step uses the agent you created in step 1. Instead of calling the model dir
 2. Agent version creation through the Foundry project client.
 3. A conversation object for stateful chat.
 4. Multi-turn responses routed through an agent reference.
+
+## What is happening when you run it
+
+The first script creates a prompt agent version inside your Foundry project. That is the point where you move from direct model calls to a reusable agent resource with instructions and a stable name.
+
+The second script talks to that agent through a conversation. Because the conversation is reused across turns, the agent can use the first exchange as context for the follow-up question.
+
+Taken together, these two scripts show the basic agent lifecycle used throughout the rest of the workshop: define an agent, create it in Foundry, and then route conversation turns through that agent instead of calling the model directly.
 
 ## Expected result
 

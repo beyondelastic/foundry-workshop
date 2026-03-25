@@ -54,9 +54,11 @@ The workshop uses a minimal dataset where each line contains a `query` field.
 
 ## Why these evaluators are a good starting point
 
-- Why task adherence and coherence are useful starter evaluators.
-- Why safety evaluators matter even in simple demos.
-- Why evaluation belongs in the development loop and not only at the end.
+- Task adherence checks whether the agent actually followed the intent of the prompt. This is a good first metric because an answer can sound fluent while still missing the task.
+- Coherence checks whether the response reads clearly and holds together as a complete answer. That makes it useful for spotting weak or confusing outputs even in small demos.
+- A safety evaluator such as violence helps you confirm that the evaluation flow can also check policy-related behavior. Even simple workshop agents should be tested for both usefulness and safety.
+
+Together, these evaluators give you a practical starting set: one checks whether the answer stayed on task, one checks whether it reads well, and one checks a basic safety dimension. That is enough to introduce evaluation as part of normal development rather than something you only do at the end.
 
 ## Expected result
 

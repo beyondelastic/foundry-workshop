@@ -76,7 +76,7 @@ python examples/04-observability/traced_model_call.py
 - `with tracer.start_as_current_span("workshop.traced_agent_conversation")` creates a parent application span around the conversation. That span is most useful when you inspect the full trace in Application Insights, while Foundry focuses on the agent response trace rows.
 - `openai_client.responses.create(..., extra_body={"agent_reference": ...})` sends each turn through the existing agent named in your `.env`, instead of calling the model directly.
 - The script prints the `conversation.id` and the response ids returned by each turn. Those identifiers line up with what you see in the agent `Traces` view.
-- The custom application span still has its own OpenTelemetry trace id, but that id is most useful in Application Insights rather than as the primary lookup key in the Foundry trace table.
+- The custom application span still has its own OpenTelemetry trace id, but that id is most useful in Application Insights. In Foundry, the printed response ids are usually the easiest way to locate the request.
 
 ## What you should see in Foundry
 

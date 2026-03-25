@@ -56,13 +56,13 @@ Recommended optional value:
 
 - `KEEP_AGENT=true`
 
-The workshop examples also accept these fallback names because Microsoft docs use them in some quickstarts:
+The workshop examples also accept these fallback names:
 
 - `PROJECT_ENDPOINT`
 - `MODEL_DEPLOYMENT_NAME`
 - `AGENT_NAME`
 
-`KEEP_AGENT` controls whether the workshop examples that create agents and related vector stores keep them after the script finishes. The default workshop behavior is `true` so participants can inspect and reuse the created resources in Foundry. Set `KEEP_AGENT=false` when you want disposable demo runs instead.
+`KEEP_AGENT` controls whether the workshop examples that create agents and related vector stores keep them after the script finishes. The default is `true`, so you can inspect and reuse the created resources in Foundry. Set `KEEP_AGENT=false` when you want a disposable run instead.
 
 ## 6. Start the workshop UI
 
@@ -86,7 +86,7 @@ mkdocs serve
 12. Create the workflow in Foundry from `examples/08-declarative-yaml/workflow.yaml`
 13. Run `examples/08-declarative-yaml/invoke_foundry_workflow.py`
 
-## 8. Notes for the new labs
+## 8. Notes for later labs
 
 The tool-call lab uses the built-in `WebSearchTool` so participants can see real tool usage without first configuring a separate MCP server.
 

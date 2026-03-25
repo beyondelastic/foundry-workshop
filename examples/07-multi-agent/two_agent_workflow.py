@@ -38,7 +38,7 @@ def main() -> None:
         "AZURE_AI_MODEL_DEPLOYMENT_NAME", "MODEL_DEPLOYMENT_NAME"
     )
     product_file_path = (
-        Path(__file__).resolve().parents[1] / "05-simple-rag" / "product_info.md"
+        Path(__file__).resolve().parents[1] / "06-simple-rag" / "product_info.md"
     )
 
     with (

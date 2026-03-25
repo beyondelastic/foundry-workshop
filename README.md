@@ -14,9 +14,8 @@ GitHub repository: [beyondelastic/foundry-workshop](https://github.com/beyondela
 6. Add basic observability with OpenTelemetry and view traces in Foundry.
 7. Use a built-in tool from a prompt agent.
 8. Build a simple RAG flow with file search.
-9. Coordinate two agents on one task with different tools.
+9. Coordinate two agents through a simple Python-managed handoff.
 10. Define agents and a workflow in YAML and execute them through the Foundry SDK.
-11. Explore one stretch topic for more advanced tracing.
 
 ## Design goals
 

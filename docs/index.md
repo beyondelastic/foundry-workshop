@@ -35,11 +35,10 @@ This workshop is intentionally small, practical, and tied to official Microsoft 
 4. Create a prompt agent and chat with it across turns.
 5. Evaluate that agent with a small dataset.
 6. Add simple OpenTelemetry tracing and inspect the trace in Foundry.
-7. Add a built-in tool to an agent and force a tool-backed answer.
+7. Add a built-in tool to an agent and inspect a tool-backed answer.
 8. Build a simple RAG flow with file search over a local document.
-9. Coordinate two agents with different tools on one task.
+9. Coordinate two agents through a simple Python handoff.
 10. Use YAML to describe agents and workflow steps, then execute them through the Foundry SDK.
-11. Explore advanced tracing as a stretch lab.
 
 ## Before you start
 
@@ -59,5 +58,5 @@ By the end of the core labs, you should be able to:
 - evaluate the agent with built-in evaluators
 - use a built-in agent tool for a grounded response
 - ground an agent answer against uploaded document content
-- coordinate two agents through a simple Python orchestrator
+- coordinate two agents through a simple Python orchestrator and explicit handoff
 - execute a declarative YAML workflow through Foundry SDK calls

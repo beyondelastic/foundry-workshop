@@ -8,6 +8,7 @@ from azure.ai.projects.models import (
 )
 from azure.identity import DefaultAzureCredential
 from dotenv import load_dotenv
+from openai import BadRequestError
 
 
 def get_env(name: str, fallback: str | None = None) -> str:
@@ -54,17 +55,31 @@ def main() -> None:
 
         try:
             conversation = openai_client.conversations.create()
-            response = openai_client.responses.create(
-                conversation=conversation.id,
-                input=(
-                    "Find a recent Microsoft Learn page about Microsoft Foundry agent evaluation and summarize its purpose in three bullets."
-                ),
-                tool_choice="required",
-                extra_body={"agent_reference": {"name": agent.name, "type": "agent_reference"}},
+            try:
+                response = openai_client.responses.create(
+                    conversation=conversation.id,
+                    input=(
+                        "Find one recent Microsoft Learn page about Foundry evaluation. Give the title and one-sentence purpose."
+                    ),
+                    extra_body={"agent_reference": {"name": agent.name, "type": "agent_reference"}},
+                )
+            except BadRequestError as exc:
+                error_code = getattr(exc, "code", None)
+                if error_code == "context_length_exceeded":
+                    raise SystemExit(
+                        "This tool example exceeded the selected model deployment's context window. Try the shorter default prompt in this sample, or switch AZURE_AI_MODEL_DEPLOYMENT_NAME to a larger-context model."
+                    ) from exc
+                raise
+
+            used_web_search = any(
+                getattr(item, "type", None) == "web_search_call"
+                for item in response.output
             )
 
             print("\nTool-backed response:\n")
             print(response.output_text)
+            print()
+            print(f"Web search tool used: {used_web_search}")
         finally:
             project_client.agents.delete_version(agent_name=agent.name, agent_version=agent.version)
             print("\nAgent deleted")

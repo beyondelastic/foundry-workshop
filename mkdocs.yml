@@ -34,6 +34,5 @@ nav:
   - 05 Observability And Tracing: 05-observability-and-tracing.md
   - 06 Tool Calls: 06-tool-calls.md
   - 07 Simple RAG: 07-simple-rag.md
-  - 08 Multi-Agent Handoff: 08-multi-agent-handoff.md
+  - 08 Two-Agent Orchestration: 08-multi-agent-handoff.md
   - 09 Declarative YAML Workflow: 09-declarative-yaml-workflow.md
-  - 10 Stretch Lab: 10-stretch-tracing.md

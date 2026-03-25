@@ -38,6 +38,28 @@ python examples/06-simple-rag/file_search_rag.py
 3. Attach `FileSearchTool` to a prompt agent.
 4. Ask questions that require grounded retrieval from the uploaded content.
 
+## What is happening when you run it
+
+The script first creates a vector store inside your Foundry-backed OpenAI project. You can think of that vector store as the retrieval index for this example. It is the place where the uploaded document will be stored and prepared for semantic lookup.
+
+Next, the script uploads `product_info.md` into that vector store by calling `upload_and_poll(...)`. The important detail here is the `and_poll` part: the script waits until Foundry finishes processing and indexing the file before moving on. That avoids a common timing problem where the agent is created successfully, but retrieval fails because the document is not ready yet.
+
+After the file is indexed, the script creates a prompt agent and gives it a `FileSearchTool` that points at the vector store ID. This is the key RAG step. The model is still the same deployed model you used in earlier labs, but now the agent has access to a retrieval tool that can search the uploaded document for relevant content before answering.
+
+When the script sends the camping question through `responses.create(...)` with `agent_reference`, Foundry routes the request to that file-search agent instead of directly to the base model. The agent reads the question, decides the answer should come from the uploaded notes, retrieves the relevant chunk or chunks from the vector store, and then uses that retrieved context to generate the final answer.
+
+That is why this counts as retrieval-augmented generation rather than just prompt engineering. The answer is not only based on the model's general training data. It is augmented with retrieved content from `product_info.md`, which makes the answer grounded in the uploaded document.
+
+In this sample, the retrieval source is intentionally small and local so the moving parts stay easy to follow. The same pattern scales outward: in a larger system, the vector store might contain many documents, but the flow is still the same sequence of indexing content, retrieving relevant chunks, and generating an answer from them.
+
+## What a vector store means here
+
+Even in this lightweight option, there is still an embedding-style retrieval step happening behind the scenes. You do not explicitly choose or call an embedding model in this sample, but the platform still has to transform the uploaded file into a searchable representation so semantic retrieval can work.
+
+That is one reason this feels simpler than building a full Azure AI Search pipeline. With `vector_stores.create(...)` and `upload_and_poll(...)`, Foundry handles the document ingestion and retrieval plumbing for you. You do not manage a separate search service, define an index schema, configure chunking and vector fields yourself, or wire up a separate embedding deployment in the sample code.
+
+Compared with Azure AI Search, this approach is easier to teach and faster to get running, but it is also less explicit and less configurable. Azure AI Search is the better fit when you want richer indexing control, hybrid retrieval, filters, ranking tuning, more advanced content pipelines, or a retrieval system shared across multiple applications. The vector store approach is best when you want the lightest path to grounded retrieval inside a Foundry-based agent workflow.
+
 ## Expected result
 
 The agent should answer questions using the uploaded document rather than general model knowledge.
@@ -48,6 +70,14 @@ The agent should answer questions using the uploaded document rather than genera
 - The file upload completes successfully.
 - The agent answers questions about the local document.
 - Cleanup removes the agent version and vector store.
+
+## Why the sample cleans up
+
+The sample deletes both the temporary agent version and the vector store at the end so the lab stays repeatable and the project does not fill up with workshop artifacts.
+
+That cleanup is useful for a guided exercise, but it is not the only reasonable choice. If you want to inspect the vector store, rerun additional questions against the same document set, or experiment with agent instructions, keeping the resources can be more practical.
+
+So the tradeoff is similar to the tool-calls lab: cleanup is good for a clean demo, while keeping the resources is better when you want to iterate.
 
 ## Why this counts as RAG
 

@@ -2,7 +2,7 @@
 
 ## Goal
 
-Add one simple OpenTelemetry trace to a model call and view it in the Foundry UI.
+Add one simple OpenTelemetry trace to a real agent conversation and view it in the Foundry UI.
 
 ## Estimated time
 
@@ -14,7 +14,7 @@ In the earlier labs, you verified that the project, model, agent, and evaluation
 
 This lab adds observability to that flow. Evaluation helps you judge output quality, while tracing helps you inspect execution details such as timing, failures, and what happened during a request.
 
-The example stays intentionally small: one Responses API call and one custom application span. That keeps the tracing setup easy to understand before you move on to more complex flows such as tool calls and RAG.
+The example stays intentionally small: one short conversation with your existing agent and one custom application span around it. That keeps the tracing setup easy to understand before you move on to more complex flows such as tool calls and RAG.
 
 ## Official references
 
@@ -23,20 +23,24 @@ The example stays intentionally small: one Responses API call and one custom app
 
 ## One-time setup in Foundry
 
-Before running the example, open your Foundry project and go to `Operate` > `Admin`.
+This lab requires an Azure Application Insights resource to be connected to the Foundry project. 
 
-This lab requires an Azure Application Insights resource to be connected to the Foundry project. In the current portal layout, a reliable way to add that connection is:
+If you do not already have one, create the Application Insights resource with Azure CLI, you can use:
 
-1. Open `Operate` > `Admin`.
-2. Select your Foundry project.
-3. Open `Connected resources`.
-4. Add or connect the Application Insights resource there.
+```bash
+az monitor app-insights component create \
+	--app my-foundry-appinsights \
+	--location swedencentral \
+	--kind web \
+	--application-type web \
+	--resource-group my-foundry-rg
+```
+
+The `az monitor app-insights component` commands are provided by the Azure CLI `application-insights` extension. Azure CLI usually installs that extension automatically the first time you run the command.
+
+After that command succeeds, return to `Operate` > `Admin` > your project > `Connected resources` and connect the new Application Insights resource.
 
 The example script reads that connection through `project_client.telemetry.get_application_insights_connection_string()`.
-
-You might also see trace-related UI under `Build` > `Agents` > select an agent > `Traces`. Treat that as a viewing and debugging surface, not the primary place to attach the Application Insights resource for this lab.
-
-Microsoft's tracing articles still mostly describe the classic portal, so menu labels can differ from what you see in the new portal.
 
 You do not need to add any new value to `.env` for this lab. The script reuses the existing project endpoint and model deployment name, and it reads the Application Insights connection string directly from the Foundry project telemetry configuration.
 
@@ -58,8 +62,9 @@ python examples/04-observability/traced_model_call.py
 2. Read the linked Application Insights connection string from the project telemetry helper.
 3. Configure Azure Monitor OpenTelemetry export.
 4. Instrument the OpenAI-compatible client with `OpenAIInstrumentor`.
-5. Create one custom application span around a `responses.create(...)` call.
-6. View the resulting trace in the Foundry UI.
+5. Start a conversation that uses the existing agent named in `AZURE_AI_AGENT_NAME`.
+6. Create one custom application span around that agent conversation.
+7. Print the conversation id and response ids so you can match them in the Foundry UI.
 
 ## What is happening under the hood
 
@@ -67,30 +72,42 @@ python examples/04-observability/traced_model_call.py
 - `OpenAIInstrumentor().instrument()` patches the OpenAI client so model calls automatically emit spans.
 - `project_client.get_openai_client()` returns the same `openai.OpenAI` style client used in the earlier labs, so the tracing example stays consistent with the existing workshop flow.
 - `trace.get_tracer(...)` gives you a tracer for your own application spans.
-- `with tracer.start_as_current_span("workshop.simple_traced_call")` creates a parent span around the model request, which makes it easier to see your application step and the nested model call together in the trace timeline.
-- `openai_client.responses.create(...)` still performs a normal Responses API call. The difference is that the call is now instrumented and exported through OpenTelemetry.
+- `openai_client.conversations.create()` creates a conversation that can be routed through your Foundry agent.
+- `with tracer.start_as_current_span("workshop.traced_agent_conversation")` creates a parent application span around the conversation. That span is most useful when you inspect the full trace in Application Insights, while Foundry focuses on the agent response trace rows.
+- `openai_client.responses.create(..., extra_body={"agent_reference": ...})` sends each turn through the existing agent named in your `.env`, instead of calling the model directly.
+- The script prints the `conversation.id` and the response ids returned by each turn. Those identifiers line up with what you see in the agent `Traces` view.
+- The custom application span still has its own OpenTelemetry trace id, but that id is most useful in Application Insights rather than as the primary lookup key in the Foundry trace table.
 
 ## What you should see in Foundry
 
-After running the script, open the trace experience available in your portal. Depending on your current Foundry UI, that may appear in an agent's `Traces` view under `Build` > `Agents`, while the Application Insights connection itself is managed through `Operate` > `Admin` > project > `Connected resources`.
+After running the script, open `Build` > `Agents`, select the agent named in `AZURE_AI_AGENT_NAME`, and open its `Traces` view.
 
-You should see a new trace that includes:
+The printed ids are useful in different places:
 
-- a top-level custom span named `workshop.simple_traced_call`
-- a nested span for the OpenAI model request
+- `Conversation ID` groups the full exchange across multiple turns.
+- `Response ID` identifies one specific traced response row in the Foundry `Traces` view.
+- The OpenTelemetry application span trace id is mainly useful in Application Insights, not as the primary lookup key in the Foundry trace table.
+
+In the Foundry `Traces` view, you should see:
+
 - duration and status information
 - model metadata and token usage details
+- a conversation that matches the printed conversation id
+- response rows that match the printed response ids
+
+If you open the connected Application Insights resource, you can inspect the broader OpenTelemetry trace there, including the custom application span named `workshop.traced_agent_conversation` and the nested spans beneath it.
 
 ## Optional note
 
-If you also want message content captured in traces, set this before running the script:
+If you also want message content captured in traces, add this to your `.env` file before running the script:
 
-```bash
-export OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT=true
+```dotenv
+OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT=true
 ```
 
 ## Common issues
 
 - `No Application Insights connection found.`: connect Application Insights from `Operate` > `Admin` > project > `Connected resources` first.
 - Authentication errors: run `az login` again and verify access to the Foundry project.
+- Agent not found: verify `AZURE_AI_AGENT_NAME` points to an agent version that already exists in your Foundry project.
 - No trace appears immediately: wait a short time and refresh the trace view in the portal, or check the connected Application Insights resource directly in Azure Monitor.

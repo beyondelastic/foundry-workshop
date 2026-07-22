@@ -1,5 +1,10 @@
 # 09 Native Foundry Workflow
 
+!!! warning "This lab is optional"
+    The native Foundry workflow feature is in preview and [will retire on December 1, 2026](https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/workflow). You can skip this lab.
+
+    If you are building new workflows, use the Microsoft Agent Framework instead. See the [Microsoft Agent Framework Workshop](https://beyondelastic.github.io/maf-workshop/) to get started.
+
 ## Goal
 
 Use a native Foundry workflow for a two-step mobile vaccination clinic scenario, then invoke that workflow from Python.
@@ -44,6 +49,9 @@ python examples/08-declarative-yaml/prepare_workflow_agents.py
 ```
 
 2. In the Foundry portal, open the `Workflows` experience, create a workflow, and paste the contents of `examples/08-declarative-yaml/workflow.yaml` into the workflow editor.
+
+!!! note "Save the workflow with the exact name"
+    When you save the workflow, it must be named `Workshop-Clinical-Operations-Workflow` so the Python invocation script can find it. If you choose a different name, set `AZURE_AI_WORKFLOW_NAME` in `.env` to match.
 
 3. Invoke the saved workflow from Python:
 

@@ -19,6 +19,7 @@ Make sure you can start the hands-on labs without hidden setup gaps.
 - Azure subscription is active.
 - Azure CLI is installed and `az login` works.
 - Python 3.10 or newer is installed.
+- The workshop Python packages are installed from `requirements.txt` (see below).
 - You have an existing Foundry project or permission to create one.
 - You have a role such as `Azure AI User` on the project.
 
@@ -29,6 +30,19 @@ python --version
 az version
 az account show
 ```
+
+## Install the Python packages
+
+All labs share one dependency set, so you only install once. From the repository root, create a virtual environment and install `requirements.txt`:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+This installs everything the lessons use (the Foundry SDK, authentication, tracing, YAML, and the docs tooling), so you do not need to run `pip install` again before each lesson. On Windows, activate the environment with `.venv\Scripts\activate` instead.
 
 ## Environment variables used in this workshop
 
@@ -58,5 +72,6 @@ Fallback names accepted by the example code:
 You are ready to continue when:
 
 - Azure CLI can show your account
+- the workshop packages installed without errors
 - you know your project endpoint
 - you know the name of a deployed model

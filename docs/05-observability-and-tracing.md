@@ -58,7 +58,6 @@ python examples/04-observability/traced_model_call.py
 
 ```python title="examples/04-observability/traced_model_call.py"
 import os
-from pathlib import Path
 
 from azure.ai.projects import AIProjectClient
 from azure.core.exceptions import ResourceNotFoundError
@@ -80,7 +79,7 @@ def get_env(name: str, fallback: str | None = None) -> str:
 
 
 def main() -> None:
-    load_dotenv(Path(".env"))
+    load_dotenv()
 
     project_endpoint = get_env("AZURE_AI_PROJECT_ENDPOINT", "PROJECT_ENDPOINT")
     model_deployment_name = get_env(

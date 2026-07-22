@@ -21,6 +21,9 @@ markdown_extensions:
   - attr_list
   - def_list
   - tables
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
 extra_css:
   - assets/stylesheets/extra.css
 extra_javascript:

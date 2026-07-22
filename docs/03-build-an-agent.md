@@ -39,6 +39,113 @@ This step uses the agent you created in step 1. Instead of calling the model dir
 - [Open create_agent.py on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/02-agent-chat/create_agent.py)
 - [Open chat_with_agent.py on GitHub](https://github.com/beyondelastic/foundry-workshop/blob/main/examples/02-agent-chat/chat_with_agent.py)
 
+```python title="examples/02-agent-chat/create_agent.py"
+import os
+
+from azure.ai.projects import AIProjectClient
+from azure.ai.projects.models import PromptAgentDefinition
+from azure.identity import DefaultAzureCredential
+from dotenv import load_dotenv
+
+
+def get_env(name: str, fallback: str | None = None) -> str:
+    value = os.getenv(name) or (os.getenv(fallback) if fallback else None)
+    if not value:
+        missing = f"{name}"
+        if fallback:
+            missing = f"{name} or {fallback}"
+        raise ValueError(f"Missing required environment variable: {missing}")
+    return value
+
+
+def main() -> None:
+    load_dotenv()
+
+    project_endpoint = get_env("AZURE_AI_PROJECT_ENDPOINT", "PROJECT_ENDPOINT")
+    model_deployment_name = get_env(
+        "AZURE_AI_MODEL_DEPLOYMENT_NAME", "MODEL_DEPLOYMENT_NAME"
+    )
+    agent_name = get_env("AZURE_AI_AGENT_NAME", "AGENT_NAME")
+
+    project = AIProjectClient(
+        endpoint=project_endpoint,
+        credential=DefaultAzureCredential(),
+    )
+
+    agent = project.agents.create_version(
+        agent_name=agent_name,
+        definition=PromptAgentDefinition(
+            model=model_deployment_name,
+            instructions=(
+                "You are a life sciences workshop assistant. Answer healthcare and "
+                "biomedical questions clearly and briefly, stay educational, and do "
+                "not provide diagnosis or treatment advice."
+            ),
+        ),
+    )
+
+    print(
+        f"Agent created (id: {agent.id}, name: {agent.name}, version: {agent.version})"
+    )
+
+
+if __name__ == "__main__":
+    main()
+```
+
+```python title="examples/02-agent-chat/chat_with_agent.py"
+import os
+
+from azure.ai.projects import AIProjectClient
+from azure.identity import DefaultAzureCredential
+from dotenv import load_dotenv
+
+
+def get_env(name: str, fallback: str | None = None) -> str:
+    value = os.getenv(name) or (os.getenv(fallback) if fallback else None)
+    if not value:
+        missing = f"{name}"
+        if fallback:
+            missing = f"{name} or {fallback}"
+        raise ValueError(f"Missing required environment variable: {missing}")
+    return value
+
+
+def main() -> None:
+    load_dotenv()
+
+    project_endpoint = get_env("AZURE_AI_PROJECT_ENDPOINT", "PROJECT_ENDPOINT")
+    agent_name = get_env("AZURE_AI_AGENT_NAME", "AGENT_NAME")
+
+    project = AIProjectClient(
+        endpoint=project_endpoint,
+        credential=DefaultAzureCredential(),
+    )
+    openai = project.get_openai_client()
+
+    conversation = openai.conversations.create()
+
+    first_response = openai.responses.create(
+        conversation=conversation.id,
+        extra_body={"agent_reference": {"name": agent_name, "type": "agent_reference"}},
+        input="What does ELISA stand for in a life sciences lab context?",
+    )
+    print("First response:")
+    print(first_response.output_text)
+
+    second_response = openai.responses.create(
+        conversation=conversation.id,
+        extra_body={"agent_reference": {"name": agent_name, "type": "agent_reference"}},
+        input="And what is it commonly used to detect or measure?",
+    )
+    print("\nSecond response:")
+    print(second_response.output_text)
+
+
+if __name__ == "__main__":
+    main()
+```
+
 ## What this lab demonstrates
 
 1. A prompt agent definition with a deployed model and instructions.
